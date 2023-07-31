@@ -1,0 +1,13 @@
+#!/bin/bash
+folder_path="$HOME/.walls"
+list=($(ls $folder_path | shuf))
+out="$HOME/.config/awesome/themes/wall.png"
+palette="gruvbox-dark-soft"
+for image in "${list[@]}"
+do
+
+lutgen apply -p $palette $folder_path/$image -o $out
+feh --no-fehbg --bg-fill $out
+
+sleep $1
+done

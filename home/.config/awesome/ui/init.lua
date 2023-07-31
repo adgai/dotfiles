@@ -1,0 +1,5 @@
+require("ui.osd")
+require("ui.bar")
+require("ui.notifications")
+require("ui.launcher")
+require("ui.powermenu")
