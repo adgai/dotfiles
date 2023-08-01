@@ -3,8 +3,6 @@
 - Font: [JetBrainsMono Nerd Font](https://www.nerdfonts.com/) 
 - Visualizer: [Cava](https://github.com/karlstav/cava)
 
-<br>
-
 ## Screenshots
 ![Screenshot](extra/screenshots/1.png)
 
