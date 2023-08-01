@@ -36,7 +36,7 @@ ruled.notification.connect_signal('request::rules', function()
 			icon = beautiful.notification_alert,
 		}
 	}
-	
+
 end)
 
 naughty.connect_signal("request::display", function(n)
@@ -71,10 +71,10 @@ naughty.connect_signal("request::display", function(n)
 							spacing = 4,
 							layout = wibox.layout.fixed.vertical,
 						}
-					}					
+					}
 				}
 			}
 		}
 	}
-	
+
 end)
