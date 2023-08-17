@@ -1,5 +1,7 @@
+require("scripts.netspeed")
 require("scripts.ram")
 require("scripts.bat")
 require("scripts.cpu")
 require("scripts.bright")
 require("scripts.vol")
+require("scripts.weather")

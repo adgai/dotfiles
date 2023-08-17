@@ -1,5 +1,5 @@
 require("ui.osd")
 require("ui.bar")
 require("ui.notifications")
-require("ui.launcher")
-require("ui.powermenu")
+require("ui.notifications_center")
+require("ui.control")
