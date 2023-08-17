@@ -6,9 +6,3 @@
 ## Screenshots
 ![Screenshot](extra/screenshots/1.png)
 ![Screenshot](extra/screenshots/2.png)
-
-## Special Thanks
-
-- [Myagko](https://github.com/Myagko) *For help with configuring wm*
-
-
