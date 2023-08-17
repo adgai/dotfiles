@@ -5,7 +5,7 @@
 
 ## Screenshots
 ![Screenshot](extra/screenshots/1.png)
-
+![Screenshot](extra/screenshots/2.png)
 
 ## Special Thanks
 
