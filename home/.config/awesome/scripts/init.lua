@@ -1,4 +1,3 @@
-require("scripts.netspeed")
 require("scripts.ram")
 require("scripts.bat")
 require("scripts.cpu")
