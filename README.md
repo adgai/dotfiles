@@ -54,6 +54,7 @@ cp -r home/.local/bin ~/.local
 cp -r home/.themes ~/
 cp home/.xinitrc ~/
 cp home/.Xresources ~/
+cp home/.gtkrc-2.0 ~/ 
 ```
 
 > Export paths in your shell. I use fish, so in ~/.config/fish/config.fish I wrote these lines:
