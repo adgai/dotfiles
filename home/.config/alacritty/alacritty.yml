@@ -157,51 +157,77 @@ font:
 draw_bold_text_with_bright_colors: true
 
 schemes:
-    gruvbox: &gruvbox
-        primary:
-            background: "0x3c3836"
-            foreground: "0xd4be98"
-        normal:
-            black: "0x928374"
-            red: "0xea6962"
-            green: "0xa9b665"
-            yellow: "0xd8a657"
-            blue: "0x7daea3"
-            magenta: "0xd3869b"
-            cyan: "0x89b482"
-            white: "0xd4be98"
-        bright:
-            black: "0x928374"
-            red: "0xea6962"
-            green: "0xa9b665"
-            yellow: "0xd8a657"
-            blue: "0x7daea3"
-            magenta: "0xd3869b"
-            cyan: "0x89b482"
-            white: "0xd4be98"
+  gruvbox: &gruvbox
+    primary:
+      background: "#3c3836"
+      foreground: "#d4be98"
+    normal:
+      black: "#928374"
+      red: "#ea6962"
+      green: "#a9b665"
+      yellow: "#d8a657"
+      blue: "#7daea3"
+      magenta: "#d3869b"
+      cyan: "#89b482"
+      white: "#d4be98"
+    bright:
+      black: "#928374"
+      red: "#ea6962"
+      green: "#a9b665"
+      yellow: "#d8a657"
+      blue: "#7daea3"
+      magenta: "#d3869b"
+      cyan: "#89b482"
+      white: "#d4be98"
 
-    mountain: &mountain
-        primary:
-            background: "#191919"
-            foreground: "#f0f0f0"
-        normal:
-            black: "#4c4c4c"
-            red: "#c49ea0"
-            green: "#9ec49f"
-            yellow: "#c4c19e"
-            blue: "#a5b4cb"
-            magenta: "#c49ec4"
-            cyan: "#9ec3c4"
-            white: "#f0f0f0"
-        bright:
-            black: "#4c4c4c"
-            red: "#c49ea0"
-            green: "#9ec49f"
-            yellow: "#c4c19e"
-            blue: "#a5b4cb"
-            magenta: "#c49ec4"
-            cyan: "#9ec3c4"
-            white: "#f0f0f0"
+  mountain: &mountain
+    primary:
+      background: "#191919"
+      foreground: "#f0f0f0"
+    normal:
+      black: "#4c4c4c"
+      red: "#c49ea0"
+      green: "#9ec49f"
+      yellow: "#c4c19e"
+      blue: "#a5b4cb"
+      magenta: "#c49ec4"
+      cyan: "#9ec3c4"
+      white: "#f0f0f0"
+    bright:
+      black: "#4c4c4c"
+      red: "#c49ea0"
+      green: "#9ec49f"
+      yellow: "#c4c19e"
+      blue: "#a5b4cb"
+      magenta: "#c49ec4"
+      cyan: "#9ec3c4"
+      white: "#f0f0f0"
+
+  everblush: &everblush
+    primary:
+      background: '#141b1e'
+      foreground: '#c4c4c4'
+    cursor:
+      text: '#dadada'
+      cursor: '#dadada'
+    normal:
+      black:   '#232a2d'
+      red:     '#e57474'
+      green:   '#8ccf7e'
+      yellow:  '#e5c76b'
+      blue:    '#67b0e8'
+      magenta: '#c47fd5'
+      cyan:    '#6cbfbf'
+      white:   '#b3b9b8'
+    bright:
+      black:   '#2d3437'
+      red:     '#ef7e7e'
+      green:   '#96d988'
+      yellow:  '#f4d67a'
+      blue:    '#71baf2'
+      magenta: '#ce89df'
+      cyan:    '#67cbe7'
+      white:   '#bdc3c2'
 
 colors: *mountain
 

@@ -85,7 +85,7 @@ local icon_widget = wibox.widget {
 		{
 			widget = wibox.widget.imagebox,
 			image = icon,
-			scaling_quality = "best",
+			clip_shape = gears.shape.circle,
 			halign = "center",
 			valign = "center",
 		},
@@ -239,12 +239,12 @@ local notif_center = awful.popup {
 	ontop = true,
 	border_width = beautiful.border_width,
 	border_color = beautiful.border_color_normal,
-	minimum_height = 715,
-	maximum_height = 715,
+	minimum_height = 585,
+	maximum_height = 585,
 	minimum_width = 500,
 	maximum_width = 500,
 	placement = function(d)
-		awful.placement.bottom_right(d, { honor_workarea = true, margins = 24 })
+		awful.placement.bottom_left(d, { honor_workarea = true, margins = 20 + beautiful.border_width * 2 })
 	end,
 	widget = main
 }

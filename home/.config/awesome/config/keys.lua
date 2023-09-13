@@ -67,8 +67,9 @@ awful.keyboard.append_global_keybindings({
 	-- binds to widgets --
 
 	awful.key({ mod }, "m", function () awesome.emit_signal("signal::dnd") end),
-	awful.key({ mod }, "n", function () awesome.emit_signal("summon::notif_center") end),
-	awful.key({ mod }, "c", function () awesome.emit_signal("summon::control") end),
+	awful.key({ mod }, "n", function () awesome.emit_signal("notif_center::open") end),
+	awful.key({ mod }, "c", function () awesome.emit_signal("time::calendar") end),
+	awful.key({ mod }, "w", function () awesome.emit_signal("profile::control") end),
 	awful.key({ mod, shift }, "b", function() awesome.emit_signal("hide::bar") end),
 	awful.key({ mod }, "t", function() awesome.emit_signal("show::tray") end),
 
@@ -88,11 +89,6 @@ awful.keyboard.append_global_keybindings({
 		if tag then
 			tag:view_only()
 		end
-		local c = awful.client.restore()
-		if c then
-			c:activate { raise = true, context = "key.unminimize" }
-		end
-
 	end},
 
 	-- move focused client to tag --

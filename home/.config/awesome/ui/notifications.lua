@@ -1,4 +1,5 @@
 local awful = require("awful")
+local gears = require("gears")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
@@ -22,7 +23,7 @@ ruled.notification.append_rule {
 	properties = {
 		screen = awful.screen.preferred,
 		implicit_timeout = 4,
-		position = "top_left",
+		position = "top_middle",
 		spacing = 10,
 		bg = beautiful.background,
 		fg = beautiful.foreground,
@@ -36,7 +37,7 @@ ruled.notification.append_rule {
 	properties = {
 		screen = awful.screen.preferred,
 		implicit_timeout = 4,
-		position = "top_left",
+		position = "top_middle",
 		spacing = 10,
 		bg = beautiful.background,
 		fg = beautiful.foreground,
@@ -55,31 +56,35 @@ naughty.connect_signal("request::display", function(n)
 
 naughty.layout.box {
 	notification = n,
-	maximum_width = 600,
-	maximum_height = 200,
+	maximum_width = 900,
+	maximum_height = 120,
 	widget_template = {
-		strategy = "max",
-		width = 100,
 		widget = wibox.container.constraint,
+		strategy = "max",
 		{
-			id = "background_role",
 			widget = naughty.container.background,
+			id = "background_role",
 			{
 				widget = wibox.container.margin,
-				left = 10,
-				right = 10,
-				top = 10,
-				bottom = 10,
+				margins = 10,
 				{
-					naughty.widget.icon,
-					fill_space = true,
-					spacing = 10,
 					layout = wibox.layout.fixed.horizontal,
+					spacing = 20,
+					fill_space = true,
 					{
+						widget = wibox.container.margin,
+						margins = {bottom = 10, top = 10},
+						{
+							widget = wibox.container.background,
+							shape = gears.shape.circle,
+							naughty.widget.icon,
+						},
+					},
+					{
+						layout = wibox.layout.fixed.vertical,
+						spacing = 10,
 						naughty.widget.title,
 						naughty.widget.message,
-						spacing = 10,
-						layout = wibox.layout.fixed.vertical,
 					}
 				}
 			}

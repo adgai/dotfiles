@@ -8,7 +8,7 @@ configuration {
 @import "~/.config/awesome/other/rofi/themes/colors.rasi"
 
 * {
-	font: "JetbrainsMono Nerd Font 14";
+	font: "RobotoMono Nerd Font 14";
 	separatorcolor: transparent;
 }
 

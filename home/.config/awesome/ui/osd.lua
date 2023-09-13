@@ -6,37 +6,42 @@ local beautiful = require("beautiful")
 -- osd ----------------------------
 
 local slider = wibox.widget {
-	widget = wibox.widget.slider,
-	maximum = 100,
-	minimum = -30,
-	bar_height = 80,
-	handle_width = -4,
-	bar_color = beautiful.background_alt,
-	bar_active_color = beautiful.accent,
+	widget = wibox.widget.progressbar,
+	max_value = 100,
+	forced_width = 380,
+	forced_height = 10,
+	shape = gears.shape.rounded_bar,
+	bar_shape = gears.shape.rounded_bar,
+	background_color = beautiful.background_urgent,
+	color = beautiful.accent,
 }
 
-local icon = wibox.widget {
+local icon_widget = wibox.widget {
 	widget = wibox.widget.textbox,
-	font = beautiful.font .. " 26",
+	font = beautiful.font .. " 14",
+}
+
+local text = wibox.widget {
+	widget = wibox.widget.textbox,
+	halign = "center"
 }
 
 local info = wibox.widget {
-	layout = wibox.layout.flex.horizontal,
+	layout = wibox.layout.fixed.horizontal,
 	{
 		widget = wibox.container.margin,
-		margins = 10,
+		margins = 20,
 		{
-			layout = wibox.layout.stack,
-			slider,
+			layout = wibox.layout.fixed.horizontal,
+			fill_space = true,
+			spacing = 8,
+			icon_widget,
 			{
-				widget = wibox.container.margin,
-				left = 6,
-				{
-					widget = wibox.container.background,
-					fg = beautiful.background,
-					icon,
-				},
+				widget = wibox.container.background,
+				forced_width = 36,
+				text,
 			},
+			slider,
 		}
 	}
 }
@@ -47,40 +52,30 @@ local osd = awful.popup {
 	ontop = true,
 	border_width = beautiful.border_width,
 	border_color = beautiful.border_color_normal,
-	minimum_height = 80,
-	maximum_height = 80,
+	minimum_height = 60,
+	maximum_height = 60,
 	minimum_width = 290,
 	maximum_width = 290,
 	placement = function(d)
-		awful.placement.top_right(d, { honor_workarea = true, margins = 24 })
+		awful.placement.bottom(d, { margins = 20 + beautiful.border_width * 2 })
 	end,
 	widget = info,
 }
 
 -- volume ---------------------------
 
-awesome.connect_signal("volume::value", function(value)
+awesome.connect_signal("volume::value", function(value, icon)
 	slider.value = value
-	if value <= 33 then
-		icon.text = ""
-	elseif value <= 66 then
-		icon.text = ""
-	elseif value <= 100 then
-		icon.text = ""
-	end
-end)
-
-awesome.connect_signal("muted::value", function(value)
-	if value == "off" then
-		icon.text = ""
-	end
+	text.text = value
+	icon_widget.text = icon
 end)
 
 -- bright ---------------------------
 
 awesome.connect_signal("bright::value", function(value)
 	slider.value = value
-	icon.text = ""
+	text.text = value
+	icon_widget.text = ""
 end)
 
 -- function -------------------------
