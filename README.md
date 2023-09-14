@@ -64,4 +64,13 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.config/awesome/other/rofi/scripts:$PATH"
 ```
 
+> Write to awesome/config/key.lua (already exists) your password and apikey from openweather 
+```
+local M = {
+  openweatherapi = "your_api_key",
+  password = "your_password",
+}
+
+return M
+```
 </details>
