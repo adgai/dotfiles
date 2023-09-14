@@ -59,7 +59,7 @@ cp home/.gtkrc-2.0 ~/
 
 > Export paths in your shell. I use fish, so in ~/.config/fish/config.fish I wrote these lines:
 
-```
+```bash
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.config/awesome/other/rofi/scripts:$PATH"
 ```
