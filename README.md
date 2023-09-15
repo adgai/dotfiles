@@ -24,7 +24,7 @@ echo XBPS_ALLOW_RESTRICTED=yes >> etc/conf
 git clone https://github.com/Sinomor/my-templates
 mv my-templates/awesome-git srcpkgs/
 ./xbps-src pkg awesome-git
-sudo xbps-install xdotool
+sudo xbps-install xtools
 xi awesome-git
 ```
 
