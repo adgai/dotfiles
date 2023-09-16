@@ -1,7 +1,7 @@
 - OS: [Void](https://voidlinux.org)
 - Window Manager: [Awesome](https://github.com/awesomeWM/awesome)
 - Terminal: [Alacritty](https://github.com/alacritty/alacritty)
-- Font: [JetBrainsMono Nerd Font](https://www.nerdfonts.com/) 
+- Font: [JetBrainsMono Nerd](https://www.nerdfonts.com/) 
 - Icons Font: [Feather](home/.fonts/)
 - Visualizer: [Cava](https://github.com/karlstav/cava)
 
