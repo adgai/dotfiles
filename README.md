@@ -19,7 +19,7 @@
 <br>
 
 - clipboard (greenclip)
-![Screenshot](extra/screenshots/clipboard.jpg)
+<img src = "extra/screenshots/clipboard.jpg" height = 500>
 
 <br>
 
