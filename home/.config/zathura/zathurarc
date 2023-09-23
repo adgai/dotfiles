@@ -20,7 +20,7 @@ set default-fg "#f0f0f0"
 set recolor-darkcolor "#f0f0f0"
 set recolor-lightcolor "#191919"
 set highlight-color "#f0f0f0"
-set highlight-active-color "#a0b77c"
+set highlight-active-color "#c49ea0"
 set inputbar-bg "#191919"
 set inputbar-fg "#f0f0f0"
 
