@@ -4,12 +4,9 @@ local xresources = require("beautiful.xresources")
 local rnotification = require("ruled.notification")
 
 local theme = {}
-
 theme.font = "JetBrainsMono Nerd Font 11"
-
 theme.useless_gap = 5
-
-
+theme.wall = "~/.config/awesome/themes/wall.jpg"
 -- icons ---------------------------------------
 
 theme.awesome_icon = "~/.config/awesome/themes/icons/awesome.png"
@@ -87,25 +84,20 @@ theme.taglist_fg_empty = theme.foreground
 theme.taglist_bg_volatile = theme.background_alt
 theme.taglist_fg_volatile = theme.foreground
 
-theme.awesome_dock_size = 80
-theme.awesome_dock_pinned = {
-	{"thunar"},
-	{"alacritty"}
-}
-theme.awesome_dock_color_active = theme.accent
-theme.awesome_dock_color_inactive = theme.background_alt
-theme.awesome_dock_color_minimized = theme.yellow
-theme.awesome_dock_color_hover = theme.background_urgent
-theme.awesome_dock_color_bg = theme.background
-theme.awesome_dock_disabled = false
-theme.awesome_dock_spacing = 10
-theme.awesome_dock_timeout = 1.2
-
 -- bling ----------------------------------------
 
 theme.playerctl_player  = {"%any"}
 theme.playerctl_update_on_activity = true
 theme.playerctl_position_update_interval = 1
+
+theme.tag_preview_client_opacity = 1
+theme.tag_preview_client_bg = theme.background_alt
+theme.tag_preview_client_border_color = theme.border_color_normal
+theme.tag_preview_client_border_width = theme.border_width
+theme.tag_preview_widget_bg = theme.background
+theme.tag_preview_widget_border_color = theme.border_color_normal
+theme.tag_preview_widget_border_width = theme.border_width
+theme.tag_preview_widget_margin = theme.useless_gap
 
 -- tooltips -------------------------------------
 
@@ -115,7 +107,7 @@ theme.tooltip_border_width = theme.border_width
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = Papirus
+theme.icon_theme = hicolor
 
 return theme
 

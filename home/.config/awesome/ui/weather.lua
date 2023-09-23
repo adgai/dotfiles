@@ -1,4 +1,5 @@
 local wibox = require("wibox")
+local helpers = require("helpers")
 local beautiful = require "beautiful"
 
 local icon_map = {
@@ -21,14 +22,6 @@ local icon_map = {
 	["13n"] = "",
 	["50n"] = ""
 }
-
-local helpers_colorizeText = function(txt, fg)
-	if fg == "" then
-		fg = "#cacaca"
-	end
-	return "<span foreground='" .. fg .. "'>" .. txt .. "</span>"
-end
-
 
 local createWeatherProg = function()
 
@@ -57,7 +50,7 @@ local createWeatherProg = function()
 
 	widget.update = function(out, i)
 		local hour = out.hourly[i]
-		widget:get_children_by_id('temp')[1].markup = helpers_colorizeText(math.floor(hour.temp) .. "°C", beautiful.foreground)
+		widget:get_children_by_id('temp')[1].markup = helpers.ui.colorizeText(math.floor(hour.temp) .. "°C", beautiful.foreground)
 		widget:get_children_by_id('icon')[1].text = icon_map[hour.weather[1].icon]
 		widget:get_children_by_id('time')[1].text = os.date("%Hh", tonumber(hour.dt))
 	end
@@ -112,13 +105,13 @@ local widget = wibox.widget {
 						halign = 'right',
 						font = beautiful.font.. " 18",
 						widget = wibox.widget.textbox,
-						markup = helpers_colorizeText("Hello", beautiful.foreground)
+						markup = helpers.ui.colorizeText("Hello", beautiful.foreground)
 					},
 					{
 						id = "desc",
 						halign = 'right',
 						widget = wibox.widget.textbox,
-						markup = helpers_colorizeText("Hello", beautiful.foreground)
+						markup = helpers.ui.colorizeText("Hello", beautiful.foreground)
 					},
 				},
 			},
@@ -144,8 +137,8 @@ local widget = wibox.widget {
 
 awesome.connect_signal("connect::weather", function(out)
 	widget:get_children_by_id('weathericon')[1].text = out.image
-	widget:get_children_by_id('desc')[1].markup = helpers_colorizeText(string.lower(out.desc), beautiful.foreground)
-	widget:get_children_by_id('temp')[1].markup = helpers_colorizeText(out.temp .. "°C", beautiful.foreground)
+	widget:get_children_by_id('desc')[1].markup = helpers.ui.colorizeText(string.lower(out.desc), beautiful.foreground)
+	widget:get_children_by_id('temp')[1].markup = helpers.ui.colorizeText(out.temp .. "°C", beautiful.foreground)
 	-- widget:get_children_by_id('feels')[1].markup = "Feels like " .. out.feelsLike .. "°C"
 	widget:get_children_by_id('humid')[1].markup = "Humidity: " .. out.humidity .. "%"
 	for i, j in ipairs(hourList) do

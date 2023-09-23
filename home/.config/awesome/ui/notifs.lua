@@ -57,7 +57,7 @@ naughty.connect_signal("request::display", function(n)
 naughty.layout.box {
 	notification = n,
 	maximum_width = 900,
-	maximum_height = 120,
+	maximum_height = 520,
 	widget_template = {
 		widget = wibox.container.constraint,
 		strategy = "max",

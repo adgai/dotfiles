@@ -20,18 +20,10 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ mod }, "a", function() awful.spawn("telegram-desktop") end),
 	awful.key({}, "Print", function() awful.spawn("flameshot gui") end),
 
-	-- rofi -- 
-
-	awful.key({ mod }, "d", function () awful.spawn("rofi -show drun -config .config/awesome/other/rofi/configs/config.rasi") end),
-	awful.key({ mod, ctrl }, "c", function () awful.spawn("rofi -modi 'clipboard:greenclip print' -show clipboard -config  .config/awesome/other/rofi/configs/config.rasi") end),
-	awful.key({ mod, ctrl }, "p", function() awful.spawn("rofi-pass") end),
-	awful.key({ mod, ctrl }, "b", function() awful.spawn ("books") end),
-	awful.key({ mod }, "x", function () awful.spawn("powermenu") end),
-
 	-- some scripts --
 
-	awful.key({ mod }, "p", function() awful.spawn("colorpicker", false) end),
-	awful.key({ mod, ctrl }, "q", function() awful.spawn("qr_codes", false) end),
+	awful.key({ mod }, "p", function() awful.spawn.with_shell("~/.local/bin/colorpicker", false) end),
+	awful.key({ mod, ctrl }, "q", function() awful.spawn.with_shell("~/.local/bin/qr_codes", false) end),
 
 	-- volume up/down/mute --
 
@@ -66,10 +58,14 @@ awful.keyboard.append_global_keybindings({
 
 	-- binds to widgets --
 
-	awful.key({ mod }, "m", function () awesome.emit_signal("signal::dnd") end),
-	awful.key({ mod }, "n", function () awesome.emit_signal("notif_center::open") end),
-	awful.key({ mod }, "c", function () awesome.emit_signal("time::calendar") end),
-	awful.key({ mod }, "w", function () awesome.emit_signal("profile::control") end),
+	awful.key({ mod, ctrl}, "b", function() awesome.emit_signal("summon::books") end),
+	awful.key({ mod, ctrl}, "c", function() awesome.emit_signal("summon::clipboard") end),
+	awful.key({ mod }, "d", function() awesome.emit_signal("summon::launcher") end),
+	awful.key({ mod }, "x", function() awesome.emit_signal("summon::powermenu") end),
+	awful.key({ mod }, "m", function() awesome.emit_signal("signal::dnd") end),
+	awful.key({ mod }, "n", function() awesome.emit_signal("notif_center::open") end),
+	awful.key({ mod }, "c", function() awesome.emit_signal("time::calendar") end),
+	awful.key({ mod }, "w", function() awesome.emit_signal("profile::control") end),
 	awful.key({ mod, shift }, "b", function() awesome.emit_signal("hide::bar") end),
 	awful.key({ mod }, "t", function() awesome.emit_signal("show::tray") end),
 
@@ -173,6 +169,14 @@ awful.keyboard.append_client_keybindings({
 	awful.key({ mod }, "q", function (c) c:kill() end),
 	awful.key({ mod }, "s", awful.client.floating.toggle),
 
+	awful.key({ mod, shift }, "n", function (c)
+			c.minimized = true
+	end),
+
+	awful.key({ mod, shift}, "m", function (c)
+		c.maximized = not c.maximized
+		c:raise()
+	end),
 	-- Move or swap by direction --
 
 	awful.key({ mod, shift }, "k", function(c)

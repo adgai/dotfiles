@@ -1,7 +1,6 @@
 local awful = require("awful")
 local gears = require("gears")
 local beautiful = require("beautiful")
-local xresources = require("beautiful.xresources")
 local capi = { client = client, mouse = mouse }
 
 local _client = {}

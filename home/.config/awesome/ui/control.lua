@@ -4,16 +4,11 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local bling = require("modules.bling")
 local playerctl = bling.signal.playerctl.lib()
+local helpers = require("helpers")
 require("scripts.init")
 local weather = require("ui.weather")
 
 screen.connect_signal("request::desktop_decoration", function(s)
-
-local rounded_rect = function (radius)
-	return function(cr, width, height)
-		gears.shape.rounded_rect(cr, width, height, radius)
-	end
-end
 
 -- arccharts ------------------------------------
 
@@ -349,16 +344,14 @@ local create_toggle_widget = function(bg, fg, icon, name, value)
 }
 end
 
-local toggle_change = function(x, widget, icon)
+local toggle_change = function(x, widget)
 	if x == "off" then
 		widget:get_children_by_id('value')[1].text = "Off"
-		widget:get_children_by_id('icon')[1].text = icon
 		widget:get_children_by_id('icon_container')[1]:set_bg(beautiful.background_urgent)
 		widget:get_children_by_id('icon_container')[1]:set_fg(beautiful.foreground)
-		widget:get_children_by_id('icon_container')[1]:set_shape(rounded_rect(10))
+		widget:get_children_by_id('icon_container')[1]:set_shape(helpers.ui.rounded_rect(10))
 	else
 		widget:get_children_by_id('value')[1].text = "On"
-		widget:get_children_by_id('icon')[1].text = icon
 		widget:get_children_by_id('icon_container')[1]:set_bg(beautiful.accent)
 		widget:get_children_by_id('icon_container')[1]:set_fg(beautiful.background)
 		widget:get_children_by_id('icon_container')[1]:set_shape(gears.shape.circle)
@@ -372,10 +365,10 @@ wifi:buttons {
 	awful.button({}, 1, function()
 		wifi_default = not wifi_default
 		if not wifi_default then
-			toggle_change("off", wifi, "")
+			toggle_change("off", wifi)
 			awful.spawn.with_shell("nmcli radio wifi off")
 		else
-			toggle_change("on", wifi, "")
+			toggle_change("on", wifi)
 			awful.spawn.with_shell("nmcli radio wifi on")
 		end
 	end),
@@ -385,9 +378,9 @@ local micro = create_toggle_widget(beautiful.accent, beautiful.background_urgent
 
 awesome.connect_signal("capture_muted::value", function(value)
 	if value == "off" then
-		toggle_change("off", micro, "")
+		toggle_change("off", micro)
 	else
-		toggle_change("on", micro, "")
+		toggle_change("on", micro)
 	end
 end)
 
@@ -399,7 +392,7 @@ micro:buttons {
 }
 
 local float = create_toggle_widget(beautiful.background_urgent, beautiful.foreground, "", "Floating", "Off")
-float:get_children_by_id('icon_container')[1]:set_shape(rounded_rect(10))
+float:get_children_by_id('icon_container')[1]:set_shape(helpers.ui.rounded_rect(10))
 
 local float_value_default = false
 
@@ -408,12 +401,12 @@ float:buttons {
 		float_value_default = not float_value_default
 		local tags = awful.screen.focused().tags
 		if not float_value_default then
-			toggle_change("off", float, "")
+			toggle_change("off", float)
 			for _, tag in ipairs(tags) do
 				awful.layout.set(awful.layout.suit.tile, tag)
 			end
 		else
-			toggle_change("on", float, "")
+			toggle_change("on", float)
 			for _, tag in ipairs(tags) do
 				awful.layout.set(awful.layout.suit.floating, tag)
 			end
@@ -429,10 +422,10 @@ opacity:buttons {
 	awful.button({}, 1, function()
 		opacity_value_default = not opacity_value_default
 		if not opacity_value_default then
-			toggle_change("off", opacity, "")
+			toggle_change("off", opacity)
 			awful.spawn.with_shell("$HOME/.config/awesome/other/picom/launch.sh --no-opacity")
 		else
-			toggle_change("on", opacity, "")
+			toggle_change("on", opacity)
 			awful.spawn.with_shell("$HOME/.config/awesome/other/picom/launch.sh --opacity")
 		end
 	end),
@@ -452,7 +445,7 @@ local toggles = wibox.widget {
 -- music player ---------------------------
 
 local art = wibox.widget {
-	image = "default_image.png",
+	image = beautiful.music_icon,
 	clip_shape = gears.shape.circle,
 	valign = "center",
 	forced_height = 160,
@@ -475,7 +468,7 @@ local create_music_button = function(text)
 	return wibox.widget {
 		widget = wibox.container.background,
 		bg = beautiful.background_urgent,
-		shape = rounded_rect(10),
+		shape = helpers.ui.rounded_rect(10),
 		{
 			widget = wibox.container.margin,
 			margins = 5,
@@ -507,16 +500,6 @@ music_button:buttons {
 	awful.button({}, 1, function()
 		playerctl:play_pause()
 	end)
-}
-
-
-
-local position = wibox.widget {
-  forced_height      = 4,
-  color              = beautiful.accent,
-  background_color   = beautiful.foreground,
-  forced_width       = 50,
-  widget             = wibox.widget.progressbar,
 }
 
 local music = wibox.widget {
@@ -576,11 +559,6 @@ playerctl:connect_signal("metadata", function(_, title, artist, album_path, albu
 	art:set_image(gears.surface.load_uncached(album_path))
 	title_widget:set_markup_silently(title)
 	artist_widget:set_markup_silently(artist)
-end)
-
-playerctl:connect_signal("position", function (_, a, b, _)
-  position.value = a
-  position.max_value = b
 end)
 
 -- main window -----------------------

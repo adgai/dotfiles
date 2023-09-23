@@ -85,7 +85,7 @@ local function osd_hide()
 	osd_timer:stop()
 end
 
-local osd_timer = gears.timer{
+local osd_timer = gears.timer {
 	timeout = 3,
 	callback = osd_hide
 }
