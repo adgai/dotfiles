@@ -14,18 +14,19 @@
 <br>
 
 - lockscreen (liplua pam)
+<br>
 ![Screenshot](extra/screenshots/lockscreen.jpg)
-
 <br>
 
 - clipboard (greenclip)
+<br>
 <img src = "extra/screenshots/clipboard.jpg" height = 500>
-
 <br>
 
 - books launcher (zathura)
+<br>
 <img src = "extra/screenshots/books.jpg" height = 500>
-
+<br>
 </details>
 
 ## Setup
