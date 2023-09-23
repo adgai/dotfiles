@@ -24,7 +24,7 @@
 <br>
 
 - books launcher (zathura)
-![Screenshot](extra/screenshots/books.jpg)
+<img src = "extra/screenshots/books.jpg" height = 500>
 
 </details>
 
