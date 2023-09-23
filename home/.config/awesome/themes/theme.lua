@@ -9,7 +9,6 @@ theme.useless_gap = 5
 theme.wall = "~/.config/awesome/themes/wall.jpg"
 -- icons ---------------------------------------
 
-theme.awesome_icon = "~/.config/awesome/themes/icons/awesome.png"
 theme.profile_image = "~/.config/awesome/themes/icons/profile_img.svg"
 theme.notification_icon = "~/.config/awesome/themes/icons/bell.svg"
 theme.notification_icon_error = "~/.config/awesome/themes/icons/alert.svg"

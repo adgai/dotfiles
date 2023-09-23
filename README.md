@@ -6,8 +6,8 @@
 - Visualizer: [Cava](https://github.com/karlstav/cava)
 
 ## Screenshots
-![Screenshot](extra/screenshots/1.png)
-![Screenshot](extra/screenshots/2.png)
+![Screenshot](extra/screenshots/1.jpg)
+![Screenshot](extra/screenshots/2.jpg)
 
 ## Setup
 
