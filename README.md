@@ -9,6 +9,25 @@
 ![Screenshot](extra/screenshots/1.jpg)
 ![Screenshot](extra/screenshots/2.jpg)
 
+<details>
+<summary><b>Some Other Stuff</b></summary>
+<br>
+
+- lockscreen (liplua pam)
+![Screenshot](extra/screenshots/lockscreen.jpg)
+
+<br>
+
+- clipboard (greenclip)
+![Screenshot](extra/screenshots/clipboard.jpg)
+
+<br>
+
+- books launcher (zathura)
+![Screenshot](extra/screenshots/books.jpg)
+
+</details>
+
 ## Setup
 
 <details>
