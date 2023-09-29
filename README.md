@@ -53,7 +53,7 @@ xi awesome-git
 > Install Other Dependencies
 
 ```bash
-sudo xbps-install rofi feh xclip gpick xrdb picom polkit-gnome fontconfig fontconfig-32bit ImageMagick zbar slop shotgun fish-shell playerctl brightnessctl
+sudo xbps-install feh xclip gpick xrdb picom polkit-gnome fontconfig fontconfig-32bit ImageMagick zbar slop shotgun fish-shell playerctl brightnessctl
 ```
 
 </details>
@@ -98,6 +98,6 @@ return M
 
 ## References
 
-[Myagko](https://github.com/Myagko/dotfiles)
-[Stardust-kyun](https://github.com/Stardust-kyun/dotfiles)
-[Saimoom](https://github.com/saimoomedits/dotfiles/tree/main)
+- [Myagko](https://github.com/Myagko/dotfiles)
+- [Stardust-kyun](https://github.com/Stardust-kyun/dotfiles)
+- [Saimoom](https://github.com/saimoomedits/dotfiles/tree/main)
