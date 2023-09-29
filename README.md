@@ -98,6 +98,6 @@ return M
 
 ## References
 
-(Myagko)[https://github.com/Myagko/dotfiles]
-(Stardust-kyun)[https://github.com/Stardust-kyun/dotfiles]
-(Saimoom)[https://github.com/saimoomedits/dotfiles/tree/main]
+[Myagko](https://github.com/Myagko/dotfiles)
+[Stardust-kyun](https://github.com/Stardust-kyun/dotfiles)
+[Saimoom](https://github.com/saimoomedits/dotfiles/tree/main)
