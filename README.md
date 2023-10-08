@@ -37,16 +37,26 @@
 <summary><b>Install Dependencies</b></summary>
 <br>
 
-> Building awesome-git package
+> Setup the void-packages repo
 
 ```bash
 git clone --depth=1 https://github.com/void-linux/void-packages
 cd void-packages
 ./xbps-src binary-bootstrap
 echo XBPS_ALLOW_RESTRICTED=yes >> etc/conf
+```
+
+> Build the awesome package
+
+```bash
 git clone https://github.com/Sinomor/my-templates
 mv my-templates/awesome-git srcpkgs/
 ./xbps-src pkg awesome-git
+```
+
+> Install the awesome package
+
+```bash
 sudo xbps-install xtools
 xi awesome-git
 ```
@@ -80,13 +90,6 @@ cp home/.Xresources ~/
 cp home/.gtkrc-2.0 ~/ 
 ```
 
-> Export paths in your shell. I use fish, so in ~/.config/fish/config.fish I wrote these lines:
-
-```bash
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.config/awesome/other/rofi/scripts:$PATH"
-```
-
 > Write to awesome/config/key.lua (already exists) your password and apikey from openweather 
 ```lua
 local M = {
@@ -96,6 +99,7 @@ local M = {
 
 return M
 ```
+
 </details>
 
 
