@@ -50,24 +50,34 @@ local url = (
 
 
 
-awful.widget.watch(string.format(GET_FORECAST_CMD, url), 600, function(_, stdout, stderr)
-  local result = json.decode(stdout)
+awful.widget.watch(string.format(GET_FORECAST_CMD, url), 900, function(_, stdout, stderr)
+local result = json.decode(stdout)
   -- Current weather setup
-  local out = {
-    desc = result.current.weather[1].description:gsub("^%l", string.upper),
-    humidity = result.current.humidity,
-    temp = math.floor(result.current.temp),
-    feelsLike = math.floor(result.current.feels_like),
-    image = icon_map[result.current.weather[1].icon],
-    hourly = {
-      result.hourly[1],
-      result.hourly[2],
-      result.hourly[3],
-      result.hourly[4],
-      result.hourly[5],
-      result.hourly[6],
-      result.hourly[7],
-    },
-    }
+local out = {
+	desc = result.current.weather[1].description:gsub("^%l", string.upper),
+	humidity = result.current.humidity,
+	temp = math.floor(result.current.temp),
+	feelsLike = math.floor(result.current.feels_like),
+	image = icon_map[result.current.weather[1].icon],
+	hourly = {
+		result.hourly[1],
+		result.hourly[2],
+		result.hourly[3],
+		result.hourly[4],
+		result.hourly[5],
+		result.hourly[6],
+		result.hourly[7],
+		result.hourly[8],
+		result.hourly[9],
+	},
+	daily = {
+      result.daily[1],
+      result.daily[2],
+      result.daily[3],
+      result.daily[4],
+      result.daily[5],
+      result.daily[6],
+	}
+}
   awesome.emit_signal("connect::weather", out)
 end)

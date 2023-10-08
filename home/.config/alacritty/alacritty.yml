@@ -185,7 +185,7 @@ schemes:
       background: "#191919"
       foreground: "#f0f0f0"
     normal:
-      black: "#4c4c4c"
+      black: "#191919"
       red: "#c49ea0"
       green: "#9ec49f"
       yellow: "#c4c19e"

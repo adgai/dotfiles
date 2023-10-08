@@ -30,7 +30,6 @@ local header = wibox.widget {
 		{
 			widget = wibox.widget.imagebox,
 			image = beautiful.profile_image,
-			clip_shape = gears.shape.circle,
 			forced_width = 140,
 			forced_height = 140,
 		},
@@ -85,7 +84,6 @@ local time = wibox.widget {
 
 local icon = wibox.widget {
 	widget = wibox.container.background,
-	shape = gears.shape.circle,
 	bg = beautiful.background_alt,
 	{
 		widget = wibox.container.margin,
@@ -133,7 +131,6 @@ main:setup {
 			header,
 			{
 				widget = wibox.container.background,
-				shape = gears.shape.rounded_bar,
 				bg = beautiful.background_alt,
 				{
 					widget = wibox.container.margin,
@@ -187,11 +184,11 @@ local function grabpassword()
 		keypressed_callback  = function(_, key)
 			if #key == 1 then
 				characters_entered = characters_entered + 1
-				prompt.markup = "<span foreground='" .. beautiful.foreground .. "'>" .. string.rep(".", characters_entered) .. "</span>"
+				prompt.markup = "<span foreground='" .. beautiful.foreground .. "'>" .. string.rep("*", characters_entered) .. "</span>"
 			elseif key == "BackSpace" then
 				if characters_entered > 1 then
 					characters_entered = characters_entered - 1
-					prompt.markup = "<span foreground='" .. beautiful.foreground .. "'>" .. string.rep(".", characters_entered) .. "</span>"
+					prompt.markup = "<span foreground='" .. beautiful.foreground .. "'>" .. string.rep("*", characters_entered) .. "</span>"
 				else
 					characters_entered = 0
 					prompt.markup = "<span foreground='" .. beautiful.foreground .. "75'>enter password...</span>"

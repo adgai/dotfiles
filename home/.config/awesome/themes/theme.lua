@@ -9,6 +9,8 @@ theme.useless_gap = 5
 theme.wall = "~/.config/awesome/themes/wall.jpg"
 -- icons ---------------------------------------
 
+theme.notification_wifi_icon = "~/.config/awesome/themes/icons/wifi.svg"
+theme.battery_icon = "~/.config/awesome/themes/icons/battery.svg"
 theme.profile_image = "~/.config/awesome/themes/icons/profile_img.svg"
 theme.notification_icon = "~/.config/awesome/themes/icons/bell.svg"
 theme.notification_icon_error = "~/.config/awesome/themes/icons/alert.svg"
@@ -70,13 +72,20 @@ theme.fg_normal = theme.foreground
 
 theme.notification_spacing = 20 + theme.border_width * 2
 
+-- tasklist ------------------------------------
+
+theme.tasklist_bg_normal = theme.background_alt
+theme.tasklist_bg_focus = theme.accent
+theme.tasklist_bg_urgent = theme.foreground
+theme.tasklist_bg_minimize = theme.background_alt
+
 -- taglist -------------------------------------
 
 theme.taglist_bg_focus = theme.accent
 theme.taglist_fg_focus = theme.background
 theme.taglist_bg_urgent = theme.background_urgent
 theme.taglist_fg_urgent = theme.foreground
-theme.taglist_bg_occupied = theme.background
+theme.taglist_bg_occupied = theme.background_alt
 theme.taglist_fg_occupied = theme.foreground
 theme.taglist_bg_empty = theme.background_alt
 theme.taglist_fg_empty = theme.foreground
@@ -89,15 +98,6 @@ theme.playerctl_player  = {"%any"}
 theme.playerctl_update_on_activity = true
 theme.playerctl_position_update_interval = 1
 
-theme.tag_preview_client_opacity = 1
-theme.tag_preview_client_bg = theme.background_alt
-theme.tag_preview_client_border_color = theme.border_color_normal
-theme.tag_preview_client_border_width = theme.border_width
-theme.tag_preview_widget_bg = theme.background
-theme.tag_preview_widget_border_color = theme.border_color_normal
-theme.tag_preview_widget_border_width = theme.border_width
-theme.tag_preview_widget_margin = theme.useless_gap
-
 -- tooltips -------------------------------------
 
 theme.tooltip_bg = theme.background
@@ -106,7 +106,6 @@ theme.tooltip_border_width = theme.border_width
 
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme = hicolor
 
 return theme
 

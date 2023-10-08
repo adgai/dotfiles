@@ -30,11 +30,12 @@ local main = wibox.widget {
 				fg = beautiful.accent,
 				{
 					widget = wibox.container.margin,
-					margins = {left = 12, right = 12, top = 2, bottom = 2},
+					margins = 6,
 					{
 						widget = wibox.widget.textbox,
 						valign = "center",
-						font = beautiful.font .. " 16",
+						id = "mode_icon",
+						font = beautiful.font .. " 14",
 						text = ">"
 					}
 				}
@@ -48,8 +49,8 @@ local main = wibox.widget {
 local launcher = awful.popup {
 	minimum_width = 390,
 	maximum_width = 390,
-	minimum_height = 482,
-	maximum_height = 482,
+	minimum_height = 478,
+	maximum_height = 478,
 	bg = beautiful.background,
 	border_width = beautiful.border_width,
 	border_color = beautiful.border_color_normal,
@@ -80,45 +81,41 @@ local function back()
 	end
 end
 
-local function func_gen(mode)
+local global_mode = nil
 
-function gen()
+local function gen(mode)
 
-	local commands = {
-		["apps"] = Gio.AppInfo.get_all(),
+	local list = {
 		["books"] = io.popen("ls -A " .. dir):lines(),
 		["clipboard"] = io.popen("greenclip print"):lines()
 	}
 	local entries = {}
 
-	if mode == "apps" then
-		for _, entry in ipairs(commands[mode]) do
+	if mode == nil then
+		for _, entry in ipairs(Gio.AppInfo.get_all()) do
 			if entry:should_show() then
 				local name = entry:get_name():gsub("&", "&amp;"):gsub("<", "&lt;"):gsub("'", "&#39;")
 				table.insert(
 					entries,
-					{ name = name, appinfo = entry, mode = mode }
+					{ name = name, appinfo = entry }
 				)
 			end
 		end
 	else
-		for entry in commands[mode] do
+		for entry in list[global_mode] do
 			local name = entry
-			local open = {
+			local open_command = {
 				["clipboard"] = "echo " .. "'"..entry.."'" .. " | xclip -r -sel clipboard",
 				["books"] = "cd " .. dir .. " && zathura " .. entry,
 			}
-			local appinfo = open[mode]
+			local appinfo = open_command[mode]
 			table.insert(
 				entries,
-					{ name = name, appinfo = appinfo, mode = mode}
+					{ name = name, appinfo = appinfo }
 			)
 		end
 	end
 	return entries
-
-end
-
 end
 
 local function filter(cmd)
@@ -136,8 +133,8 @@ local function filter(cmd)
 	end
 
 	-- Sort entries
-	if filtered[index_entry].mode ~= "clipboard" then
-	table.sort(filtered, function(a, b) return a.name:lower() < b.name:lower() end)
+	if global_mode ~= "clipboard" then
+		table.sort(filtered, function(a, b) return a.name:lower() < b.name:lower() end)
 	end
 	table.sort(regfiltered, function(a, b) return a.name:lower() < b.name:lower() end)
 
@@ -157,7 +154,7 @@ local function filter(cmd)
 				-- add left double click to launch (first click to navigate entry, second to run entry)
 				awful.button({}, 1, function()
 					if index_entry == i then
-						if filtered[index_entry].mode == "apps" then
+						if global_mode == nil then
 							filtered[index_entry].appinfo:launch()
 						else
 							awful.spawn.with_shell(filtered[index_entry].appinfo)
@@ -180,7 +177,6 @@ local function filter(cmd)
 				end),
 			},
 			widget = wibox.container.background,
-			bg = beautiful.background_alt,
 			{
 				margins = 10,
 				widget = wibox.container.margin,
@@ -211,13 +207,25 @@ local function filter(cmd)
 	collectgarbage("collect")
 end
 
-local function open()
+local function open(mode)
 
+	local mode_icon = {
+		["clipboard"] = "",
+		["books"] = "",
+	}
+
+	if mode == nil then
+		main:get_children_by_id('mode_icon')[1].text = ""
+	else
+		main:get_children_by_id('mode_icon')[1].text = mode_icon[mode]
+	end
+
+	global_mode = mode
 	-- Reset index and page
 	index_start, index_entry = 1, 1
 
 	-- Get entries
-	unfiltered = gen()
+	unfiltered = gen(mode)
 	filter("")
 
 	-- Prompt
@@ -234,10 +242,12 @@ local function open()
 			filter(cmd)
 		end,
 		exe_callback = function()
-			if filtered[index_entry].mode == "apps" then
-				filtered[index_entry].appinfo:launch()
-			else
-				awful.spawn.with_shell(filtered[index_entry].appinfo)
+			if filtered[index_entry] then
+				if mode == nil then
+					filtered[index_entry].appinfo:launch()
+				else
+					awful.spawn.with_shell(filtered[index_entry].appinfo)
+				end
 			end
 		end,
 		keypressed_callback = function(_, key)
@@ -250,13 +260,10 @@ local function open()
 	}
 end
 
-
-
 -- Summon funcs --
 awesome.connect_signal("summon::books", function()
-	func_gen("books")
 	if not launcher.visible then
-		open()
+		open("books")
 		launcher.visible = true
 	else
 		awful.keygrabber.stop()
@@ -265,9 +272,8 @@ awesome.connect_signal("summon::books", function()
 end)
 
 awesome.connect_signal("summon::clipboard", function()
-	func_gen("clipboard")
 	if not launcher.visible then
-		open()
+		open("clipboard")
 		launcher.visible = true
 	else
 		awful.keygrabber.stop()
@@ -276,7 +282,6 @@ awesome.connect_signal("summon::clipboard", function()
 end)
 
 awesome.connect_signal("summon::launcher", function()
-	func_gen("apps")
 	if not launcher.visible then
 		open()
 		launcher.visible = true

@@ -2,9 +2,12 @@ local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")
 local naughty = require("naughty")
+local helpers = require("helpers")
 local beautiful = require("beautiful")
 
 -- notification list --
+local notifs_count = 0
+awesome.emit_signal("notifs::count", notifs_count)
 
 local label = wibox.widget {
 	text = "Notifications",
@@ -14,7 +17,7 @@ local label = wibox.widget {
 
 
 local notifs_clear = wibox.widget {
-	markup = "<span foreground='"..beautiful.accent.."'></span>",
+	markup = helpers.ui.colorizeText("", beautiful.accent),
 	align = "center",
 	valign = "center",
 	widget = wibox.widget.textbox,
@@ -22,6 +25,8 @@ local notifs_clear = wibox.widget {
 
 notifs_clear:buttons(gears.table.join(awful.button({}, 1, function()
 	_G.notif_center_reset_notifs_container()
+	notifs_count = 0
+	awesome.emit_signal("notifs::count", notifs_count)
 end)))
 
 local notifs_empty = wibox.widget {
@@ -30,7 +35,7 @@ local notifs_empty = wibox.widget {
 	{
 		layout = wibox.layout.flex.vertical,
 		{
-		markup = "<span foreground='"..beautiful.background_urgent.."'>No notifications</span>",
+		markup = helpers.ui.colorizeText("No notifications", beautiful.background_urgent),
 		font = beautiful.font,
 		align = "center",
 		valign = "center",
@@ -106,18 +111,13 @@ local title_widget = wibox.widget {
 }
 
 local time_widget = wibox.widget {
-	widget = wibox.container.background,
-	bg = beautiful.accent,
-	fg = beautiful.background,
+	widget = wibox.container.margin,
+	margins = { right = 4 },
 	{
-		widget = wibox.container.margin,
-		margins = {left = 10, right = 10, top = 4, bottom = 4},
-		{
-			widget = wibox.widget.textbox,
-			text = time,
-			align = "right",
-			valign = "bottom",
-		},
+		widget = wibox.widget.textbox,
+		text = time,
+		align = "right",
+		valign = "bottom",
 	},
 }
 
@@ -141,13 +141,11 @@ local box = wibox.widget {
 			margins = 10,
 			{
 				layout = wibox.layout.align.vertical,
-				expand = "none",
 				{
 					layout = wibox.layout.fixed.vertical,
 					spacing = 10,
 					{
 						layout = wibox.layout.align.horizontal,
-						expand = "none",
 						title_widget,
 						nil,
 						time_widget,
@@ -162,6 +160,8 @@ local box = wibox.widget {
 
 box:buttons(gears.table.join(awful.button({}, 1, function()
 	_G.notif_center_remove_notif(box)
+	notifs_count = notifs_count - 1
+	awesome.emit_signal("notifs::count", notifs_count)
 end)))
 
 return box
@@ -199,6 +199,18 @@ naughty.connect_signal("request::display", function(n)
 	end
 
 	notifs_container:insert(1, create_notif(appicon, n, width))
+	notifs_count = notifs_count + 1
+	awesome.emit_signal("notifs::count", notifs_count)
+end)
+
+local notifs_count_widget = wibox.widget.textbox()
+
+awesome.connect_signal("notifs::count", function(count)
+	if count == 0 then
+		notifs_count_widget.text = ""
+	else
+		notifs_count_widget.text = "("..count..")"
+	end
 end)
 
 local notifs = wibox.widget {
@@ -209,7 +221,12 @@ local notifs = wibox.widget {
 		margins = 10,
 		{
 			layout = wibox.layout.align.horizontal,
-			label,
+			{
+				layout = wibox.layout.fixed.horizontal,
+				spacing = 10,
+				label,
+				notifs_count_widget
+			},
 			nil,
 			notifs_clear,
 		},
@@ -227,14 +244,13 @@ local main = wibox.widget {
 		margins = 10,
 		{
 			layout = wibox.layout.fixed.vertical,
-			fill_space = true,
 			spacing = 10,
 			notifs,
 		}
 	}
 }
 
-local notif_center = awful.popup { 
+local notif_center = awful.popup {
 	visible = false,
 	ontop = true,
 	border_width = beautiful.border_width,
@@ -249,6 +265,7 @@ local notif_center = awful.popup {
 	widget = main
 }
 
+
 -- summon functions --
 
 awesome.connect_signal("summon::notif_center", function()
@@ -258,11 +275,15 @@ end)
 -- hide on click --
 
 client.connect_signal("button::press", function()
-	notif_center.visible = false
+	if notif_center.visible == true then
+		awesome.emit_signal("notif_center::open")
+	end
 end)
 
 awful.mouse.append_global_mousebinding(
 	awful.button({ }, 1, function()
-		notif_center.visible = false
+		if notif_center.visible == true then
+			awesome.emit_signal("notif_center::open")
+		end
 	end)
 )

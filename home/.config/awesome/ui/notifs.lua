@@ -73,7 +73,7 @@ naughty.layout.box {
 					fill_space = true,
 					{
 						widget = wibox.container.margin,
-						margins = {bottom = 10, top = 10},
+						margins = { bottom = 10, top = 10 },
 						{
 							widget = wibox.container.background,
 							shape = gears.shape.circle,

@@ -8,7 +8,7 @@ local beautiful = require("beautiful")
 client.connect_signal("request::titlebars", function(c)
 
 local titlebar = awful.titlebar(c, {
-	position = "top",
+	position = "left",
 	size = 36,
 })
 
@@ -26,38 +26,30 @@ local buttons = gears.table.join(
 )
 
 titlebar.widget = {
-	layout = wibox.layout.flex.horizontal,
-	{
-		widget = wibox.container.background,
-		buttons = buttons,
-		{
-			widget = wibox.container.margin,
-			left = 10,
-			{
-				widget = wibox.container.constraint,
-				width = 100,
-				{
-					halign = "left",
-         	   widget = awful.titlebar.widget.titlewidget(c)
-				},
-			},
-		},
-	},
+	layout = wibox.layout.align.vertical,
 	{
 		widget = wibox.container.place,
-		halign = "right",
+		valign = "top",
 		{
 			widget = wibox.container.margin,
-			margins = {right = 10, top = 8, bottom = 8},
+			margins = {right = 8, left = 8, top = 8},
 			{
-				layout = wibox.layout.fixed.horizontal,
+				layout = wibox.layout.fixed.vertical,
 				spacing = 8,
 				awful.titlebar.widget.maximizedbutton(c),
 				awful.titlebar.widget.minimizebutton(c),
 				awful.titlebar.widget.closebutton(c)
 			}
 		}
-	}
+	},
+	{
+		widget = wibox.container.background,
+		buttons = buttons,
+	},
+	{
+		widget = wibox.container.background,
+		buttons = buttons,
+	},
 }
 
 end)

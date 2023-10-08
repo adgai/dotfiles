@@ -20,7 +20,6 @@ styles.normal = {
 styles.focus   = {
 	fg_color = beautiful.background,
 	bg_color = beautiful.accent,
-	shape = gears.shape.circle,
 }
 
 styles.weekday = {
@@ -167,11 +166,15 @@ end)
 -- hide on click --
 
 client.connect_signal("button::press", function()
-	calendar_widget.visible = false
+	if calendar_widget.visible == true then
+		awesome.emit_signal("time::calendar")
+	end
 end)
 
 awful.mouse.append_global_mousebinding(
 	awful.button({ }, 1, function()
-		calendar_widget.visible = false
+		if calendar_widget.visible == true then
+			awesome.emit_signal("time::calendar")
+		end
 	end)
 )

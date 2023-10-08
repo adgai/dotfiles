@@ -12,17 +12,18 @@ shift = "Shift"
 terminal = "alacritty"
 
 awful.keyboard.append_global_keybindings({
+
 	-- launch programms --
 
 	awful.key({ mod }, "Return", function() awful.spawn(terminal) end),
 	awful.key({ mod }, "e", function() awful.spawn("thunar") end),
 	awful.key({ mod }, "b", function() awful.spawn("librewolf") end),
-	awful.key({ mod }, "a", function() awful.spawn("telegram-desktop") end),
+	awful.key({ mod }, "a", function() awful.spawn("ayugram-desktop") end),
 	awful.key({}, "Print", function() awful.spawn("flameshot gui") end),
 
 	-- some scripts --
 
-	awful.key({ mod }, "p", function() awful.spawn.with_shell("~/.local/bin/colorpicker", false) end),
+	awful.key({ mod, ctrl }, "p", function() awful.spawn.with_shell("~/.local/bin/colorpicker", false) end),
 	awful.key({ mod, ctrl }, "q", function() awful.spawn.with_shell("~/.local/bin/qr_codes", false) end),
 
 	-- volume up/down/mute --
@@ -58,14 +59,15 @@ awful.keyboard.append_global_keybindings({
 
 	-- binds to widgets --
 
-	awful.key({ mod, ctrl}, "b", function() awesome.emit_signal("summon::books") end),
-	awful.key({ mod, ctrl}, "c", function() awesome.emit_signal("summon::clipboard") end),
+	awful.key({ mod, ctrl }, "b", function() awesome.emit_signal("summon::books") end),
+	awful.key({ mod, ctrl }, "c", function() awesome.emit_signal("summon::clipboard") end),
 	awful.key({ mod }, "d", function() awesome.emit_signal("summon::launcher") end),
 	awful.key({ mod }, "x", function() awesome.emit_signal("summon::powermenu") end),
 	awful.key({ mod }, "m", function() awesome.emit_signal("signal::dnd") end),
+	awful.key({ mod }, "w", function() awesome.emit_signal("summon::wifi_popup") end),
 	awful.key({ mod }, "n", function() awesome.emit_signal("notif_center::open") end),
 	awful.key({ mod }, "c", function() awesome.emit_signal("time::calendar") end),
-	awful.key({ mod }, "w", function() awesome.emit_signal("profile::control") end),
+	awful.key({ mod }, "p", function() awesome.emit_signal("profile::control") end),
 	awful.key({ mod, shift }, "b", function() awesome.emit_signal("hide::bar") end),
 	awful.key({ mod }, "t", function() awesome.emit_signal("show::tray") end),
 

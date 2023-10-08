@@ -10,8 +10,6 @@ local slider = wibox.widget {
 	max_value = 100,
 	forced_width = 380,
 	forced_height = 10,
-	shape = gears.shape.rounded_bar,
-	bar_shape = gears.shape.rounded_bar,
 	background_color = beautiful.background_urgent,
 	color = beautiful.accent,
 }
@@ -86,7 +84,7 @@ local function osd_hide()
 end
 
 local osd_timer = gears.timer {
-	timeout = 3,
+	timeout = 4,
 	callback = osd_hide
 }
 

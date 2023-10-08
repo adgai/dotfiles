@@ -7,11 +7,11 @@ ruled.client.connect_signal("request::rules", function()
 
 -- global ---------------
 
---ruled.client.append_rule {
---	id = "titlebars",
---	rule_any = { type = { "normal", "dialog" } },
---	properties = { titlebars_enabled = true }
---}
+ruled.client.append_rule {
+	id = "titlebars",
+	rule_any = { type = { "normal", "dialog" } },
+	properties = { titlebars_enabled = true }
+}
 
 
 ruled.client.append_rule {
@@ -38,7 +38,7 @@ ruled.client.append_rule {
 	properties = { tag = "1"}
 }
 ruled.client.append_rule {
-	rule_any = { class = { "TelegramDesktop" } },
+	rule_any = { class = { "TelegramDesktop", "AyuGramDesktop" } },
 	properties = { tag = "2"}
 }
 ruled.client.append_rule {
