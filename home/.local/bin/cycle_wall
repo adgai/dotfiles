@@ -8,7 +8,7 @@ for image in "${list[@]}"
 do
 
 #lutgen apply -p $palette $folder_path/$image -o $out
-lutgen apply --hald-clut $lut $folder_path/$image -o $out
+$HOME/.local/bin/lutgen apply --hald-clut $lut $folder_path/$image -o $out
 feh --no-fehbg --bg-fill $out
 
 sleep $1
