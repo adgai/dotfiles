@@ -1,4 +1,4 @@
-![img](.git/asset/awesome.png)
+![img](extra/asset/awesome.png)
 
 ## Information
 - OS: [Void](https://voidlinux.org)
