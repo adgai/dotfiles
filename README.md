@@ -1,3 +1,6 @@
+![img](.git/asset/awesome.png)
+
+## Information
 - OS: [Void](https://voidlinux.org)
 - Window Manager: [Awesome](https://github.com/awesomeWM/awesome)
 - Terminal: [Alacritty](https://github.com/alacritty/alacritty)
