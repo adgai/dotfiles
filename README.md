@@ -43,6 +43,7 @@
 git clone --depth=1 https://github.com/void-linux/void-packages
 cd void-packages
 ./xbps-src binary-bootstrap
+echo XBPS_ALLOW_RESTRICTED=yes >> etc/conf
 ```
 
 > Build the awesome package
