@@ -27,7 +27,6 @@ local main = wibox.widget {
 			{
 				widget = wibox.container.background,
 				bg = beautiful.background_alt,
-				fg = beautiful.accent,
 				{
 					widget = wibox.container.margin,
 					margins = 6,
@@ -36,7 +35,6 @@ local main = wibox.widget {
 						valign = "center",
 						id = "mode_icon",
 						font = beautiful.font .. " 14",
-						text = ">"
 					}
 				}
 			},
@@ -90,29 +88,23 @@ local function gen(mode)
 		["clipboard"] = io.popen("greenclip print"):lines()
 	}
 	local entries = {}
-
 	if mode == nil then
 		for _, entry in ipairs(Gio.AppInfo.get_all()) do
 			if entry:should_show() then
 				local name = entry:get_name():gsub("&", "&amp;"):gsub("<", "&lt;"):gsub("'", "&#39;")
-				table.insert(
-					entries,
-					{ name = name, appinfo = entry }
-				)
+				table.insert( entries, { name = name, appinfo = entry } )
 			end
 		end
 	else
 		for entry in list[global_mode] do
-			local name = entry
 			local open_command = {
 				["clipboard"] = "echo " .. "'"..entry.."'" .. " | xclip -r -sel clipboard",
 				["books"] = "cd " .. dir .. " && zathura " .. entry,
 			}
 			local appinfo = open_command[mode]
-			table.insert(
-				entries,
-					{ name = name, appinfo = appinfo }
-			)
+			if entry:match("[%w+%p+]") then
+				table.insert( entries, { name = entry, appinfo = appinfo } )
+			end
 		end
 	end
 	return entries
@@ -215,9 +207,9 @@ local function open(mode)
 	}
 
 	if mode == nil then
-		main:get_children_by_id('mode_icon')[1].text = ""
+		main:get_children_by_id("mode_icon")[1].text = ""
 	else
-		main:get_children_by_id('mode_icon')[1].text = mode_icon[mode]
+		main:get_children_by_id("mode_icon")[1].text = mode_icon[mode]
 	end
 
 	global_mode = mode

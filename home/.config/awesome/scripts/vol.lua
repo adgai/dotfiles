@@ -1,4 +1,5 @@
 local awful = require("awful")
+local gears = require("gears")
 
 
 function update_value_of_volume()
@@ -35,10 +36,15 @@ function update_value_of_capture_muted()
 	end)
 end
 
-update_value_of_volume()
-update_value_of_capture_muted()
-
 function updateVolumeSignals()
 	update_value_of_volume()
 	update_value_of_capture_muted()
 end
+
+gears.timer {
+	call_now = true,
+	autostart = true,
+	timeout = 2,
+	callback = updateVolumeSignals,
+	single_shot = true
+}

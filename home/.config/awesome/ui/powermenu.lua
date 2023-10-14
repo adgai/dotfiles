@@ -1,6 +1,7 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
+require("ui.lock")
 
 local elements = {
 	{"poweroff", command = "loginctl poweroff", icon = ""},
@@ -46,25 +47,27 @@ local powermenu = awful.popup {
 }
 
 local function next()
-	if index_element ~= #elements then
+	if index_element == 2 then
+		index_element = index_element + 2
+	elseif index_element ~= #elements then
 		index_element = index_element + 1
 	end
 end
 
 local function back()
-	if index_element ~= 1 then
+	if index_element ~= 1 and index_element ~= 3 then
 		index_element = index_element - 1
 	end
 end
 
 local function up()
-	if index_element ~= 1 then
+	if index_element > 2 then
 		index_element = index_element - 2
 	end
 end
 
 local function down()
-	if index_element ~= #elements then
+	if index_element < 3 then
 		index_element = index_element + 2
 	end
 end
@@ -122,16 +125,16 @@ local function open()
 			awful.spawn(elements[index_element].command)
 		end,
 		keypressed_callback = function(_, key)
-			if key == "Right" then
+			if key == "Right" or key == "l" then
 				next()
 				add_elements()
-			elseif key == "Left" then
+			elseif key == "Left" or key == "h" then
 				back()
 				add_elements()
-			elseif key == "Up" then
+			elseif key == "Up" or key == "k" then
 				up()
 				add_elements()
-			elseif key == "Down" then
+			elseif key == "Down" or key == "j" then
 				down()
 				add_elements()
 			end

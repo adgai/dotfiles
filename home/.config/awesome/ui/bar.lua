@@ -2,7 +2,6 @@ local gears = require("gears")
 local awful = require("awful")
 local wibox = require("wibox")
 local beautiful = require("beautiful")
-local bling = require("modules.bling")
 local naughty = require("naughty")
 local vars = require("ui.vars")
 require("scripts.init")
@@ -13,30 +12,29 @@ screen.connect_signal("request::desktop_decoration", function(s)
 
 local profile = wibox.widget {
 	layout = wibox.layout.fixed.vertical,
-	fill_space = true,
 	{
 		widget = wibox.container.background,
 		id = "profile",
 		bg = beautiful.background_alt,
 		{
 			widget = wibox.container.margin,
-			margins = {bottom = 8, top = 8},
+			margins = { bottom = 8, top = 8 },
 			{
 				widget = wibox.widget.textbox,
 				text = "",
-				halign = "center",
+				halign = "center"
 			}
 		}
-	},
+	}
 }
 
 awesome.connect_signal("profile::control", function()
 	vars.profile_default = not vars.profile_default
 	if not vars.profile_default then
-		profile:get_children_by_id('profile')[1]:set_bg(beautiful.background_alt)
+		profile:get_children_by_id("profile")[1]:set_bg(beautiful.background_alt)
 		awesome.emit_signal("summon::control")
 	else
-		profile:get_children_by_id('profile')[1]:set_bg(beautiful.background_urgent)
+		profile:get_children_by_id("profile")[1]:set_bg(beautiful.background_urgent)
 		awesome.emit_signal("summon::control")
 	end
 end)
@@ -76,11 +74,11 @@ local tasklist = awful.widget.tasklist {
 				end,
 			})
 			tooltip.mode = "outside"
-			tooltip.gaps = 6
-			tooltip.margins_leftright = 12
+			tooltip.gaps = beautiful.useless_gap
+			tooltip.margins_leftright = 10
 			tooltip.margins_topbottom = 10
-		end,
-	},
+		end
+	}
 }
 
 local tasklist_widget = wibox.widget {
@@ -104,17 +102,17 @@ local keyboard = wibox.widget {
 		{
 			layout = wibox.layout.fixed.vertical,
 			spacing = 8,
-  						{
+			{
 				widget = wibox.container.place,
 				halign = "center",
 				{
 					widget = wibox.container.margin,
-					margins = {left = -5, right = -5},
+					margins = { left = -5, right = -5 },
 					mykeyboard,
-  				},
-			},
-		},
-	},
+  				}
+			}
+		}
+	}
 }
 
 -- tray --------------------------------
@@ -154,12 +152,12 @@ local tray = wibox.widget {
 }
 
 awesome.connect_signal("show::tray", function()
-	if not tray:get_children_by_id('tray')[1].visible then
-			tray:get_children_by_id('button')[1].text = ""
-			tray:get_children_by_id('tray')[1].visible = true
+	if not tray:get_children_by_id("tray")[1].visible then
+			tray:get_children_by_id("button")[1].text = ""
+			tray:get_children_by_id("tray")[1].visible = true
 		else
-			tray:get_children_by_id('button')[1].text = ""
-			tray:get_children_by_id('tray')[1].visible = false
+			tray:get_children_by_id("button")[1].text = ""
+			tray:get_children_by_id("tray")[1].visible = false
 	end
 end)
 
@@ -177,7 +175,7 @@ local time = wibox.widget {
 		bg = beautiful.background_alt,
 		{
 			widget = wibox.container.margin,
-			margins = {bottom = 6, top = 6},
+			margins = { bottom = 6, top = 6 },
 			{
 				layout = wibox.layout.fixed.vertical,
 				spacing = 4,
@@ -195,10 +193,10 @@ local time = wibox.widget {
 awesome.connect_signal("time::calendar", function()
 	vars.time_default = not vars.time_default
 	if not vars.time_default then
-		time:get_children_by_id('clock')[1]:set_bg(beautiful.background_alt)
+		time:get_children_by_id("clock")[1]:set_bg(beautiful.background_alt)
 		awesome.emit_signal("summon::calendar_widget")
 	else
-		time:get_children_by_id('clock')[1]:set_bg(beautiful.background_urgent)
+		time:get_children_by_id("clock")[1]:set_bg(beautiful.background_urgent)
 		awesome.emit_signal("summon::calendar_widget")
 	end
 end)
@@ -233,7 +231,7 @@ local taglist = awful.widget.taglist {
 			halign = "center",
 			valign = "center",
 			widget = wibox.widget.textbox
-		},
+		}
 	}
 }
 
@@ -248,39 +246,6 @@ local taglist_widget = wibox.widget {
 }
 -- battery ------------------------------
 
-local bat_icon = wibox.widget {
-	widget = wibox.widget.imagebox,
-	valign = "center"
-}
-
-local bat_progressbar = wibox.widget {
-	widget = wibox.widget.progressbar,
-	max_value = 100,
-	forced_width = 60,
-	background_color = beautiful.background_urgent,
-	color = beautiful.green,
-}
-
-awesome.connect_signal("bat::value", function(value)
-	bat_progressbar.value = value
-	if value > 70 then
-		bat_progressbar.color = beautiful.green
-	elseif value > 20 then
-		bat_progressbar.color = beautiful.yellow
-	else
-		bat_progressbar.color = beautiful.red
-	end
-end)
-
-awesome.connect_signal("bat::state", function(value)
-	if value == "Discharging" then
-		bat_icon.text = ""
-	else
-		bat_progressbar.color = beautiful.green
-		bat_icon.image = beautiful.battery_icon
-	end
-end)
-
 local bat = wibox.widget {
 	widget = wibox.container.background,
 	bg = beautiful.background_alt,
@@ -289,15 +254,45 @@ local bat = wibox.widget {
 		{
 			widget = wibox.container.rotate,
 			direction = "east",
-			bat_progressbar,
+			{
+				widget = wibox.widget.progressbar,
+				id = "progressbar",
+				max_value = 100,
+				forced_width = 60,
+				background_color = beautiful.background_urgent,
+			}
 		},
 		{
 			widget = wibox.container.background,
 			fg = beautiful.background,
-			bat_icon,
+			{
+				widget = wibox.widget.imagebox,
+				id = "icon",
+				valign = "center"
+			}
 		}
-	},
+	}
 }
+
+awesome.connect_signal("bat::value", function(value)
+	bat:get_children_by_id("progressbar")[1].value = value
+	if value > 70 then
+		bat:get_children_by_id("progressbar")[1].color = beautiful.green
+	elseif value > 20 then
+		bat:get_children_by_id("progressbar")[1].color = beautiful.yellow
+	else
+		bat:get_children_by_id("progressbar")[1].color = beautiful.red
+	end
+end)
+
+awesome.connect_signal("bat::state", function(value)
+	if value == "Discharging" then
+		bat:get_children_by_id("icon")[1].text = ""
+	else
+		bat:get_children_by_id("progressbar")[1].color = beautiful.green
+		bat:get_children_by_id("icon")[1].image = beautiful.battery_icon
+	end
+end)
 
 -- dnd ------------------------------
 
@@ -308,13 +303,13 @@ local dnd_button = wibox.widget {
 	fg = beautiful.foregraund,
 	{
 		widget = wibox.container.margin,
-		margins = {top = 8, bottom = 8},
+		margins = { top = 8, bottom = 8 },
 		{
 			widget = wibox.widget.textbox,
 			id = "icon",
 			text = "",
 			halign = "center",
-		},
+		}
 	}
 }
 
@@ -322,10 +317,10 @@ local dnd_button = wibox.widget {
 awesome.connect_signal("signal::dnd", function()
 	vars.dnd = not vars.dnd
 	if not vars.dnd then
-		dnd_button:get_children_by_id('icon')[1].text = ""
+		dnd_button:get_children_by_id("icon")[1].text = ""
 		naughty.suspend()
 	else
-		dnd_button:get_children_by_id('icon')[1].text = ""
+		dnd_button:get_children_by_id("icon")[1].text = ""
 		naughty.resume()
 	end
 end)
@@ -333,10 +328,10 @@ end)
 awesome.connect_signal("notif_center::open", function()
 	vars.notif_center_default = not vars.notif_center_default
 	if not vars.notif_center_default then
-		dnd_button:get_children_by_id('dnd')[1]:set_bg(beautiful.background_alt)
+		dnd_button:get_children_by_id("dnd")[1]:set_bg(beautiful.background_alt)
 		awesome.emit_signal("summon::notif_center")
 	else
-		dnd_button:get_children_by_id('dnd')[1]:set_bg(beautiful.background_urgent)
+		dnd_button:get_children_by_id("dnd")[1]:set_bg(beautiful.background_urgent)
 		awesome.emit_signal("summon::notif_center")
 	end
 end)
@@ -373,15 +368,15 @@ bar = awful.wibar {
 			content_fill_horizontal = true,
 			{
 				widget = wibox.container.margin,
-				margins = {left = 10, right = 10, top = 10},
+				margins = { left = 10, right = 10, top = 10 },
 				{
 					layout = wibox.layout.fixed.vertical,
 					spacing = 10,
 					profile,
 					time,
 					taglist_widget,
-				},
-			},
+				}
+			}
 		},
 		{
 			widget = wibox.container.place,
@@ -389,12 +384,12 @@ bar = awful.wibar {
 			content_fill_horizontal = true,
 			{
 				widget = wibox.container.margin,
-				margins = {left = 10, right = 10},
+				margins = { left = 10, right = 10 },
 				{
 					layout = wibox.layout.fixed.vertical,
 					tasklist_widget,
-				},
-			},
+				}
+			}
 		},
 		{
 			widget = wibox.container.place,
@@ -402,7 +397,7 @@ bar = awful.wibar {
 			content_fill_horizontal = true,
 			{
 				widget = wibox.container.margin,
-				margins = {right = 10, left = 10, bottom = 10},
+				margins = { right = 10, left = 10, bottom = 10 },
 				{
 					layout = wibox.layout.fixed.vertical,
 					spacing = 10,
@@ -410,9 +405,9 @@ bar = awful.wibar {
 					bat,
 					keyboard,
 					dnd_button,
-				},
-			},
-		},
+				}
+			}
+		}
 	}
 }
 

@@ -1,8 +1,8 @@
 #!/bin/bash
 folder_path="$HOME/.walls"
 list=($(ls $folder_path | shuf))
-out="$HOME/.config/awesome/themes/wall.jpg"
-palette="everblush"
+out="$HOME/.config/awesome/theme/wall.jpg"
+#palette="everblush"
 lut="$HOME/.config/awesome/other/mountain.png"
 for image in "${list[@]}"
 do

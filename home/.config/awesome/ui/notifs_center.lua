@@ -17,7 +17,7 @@ local label = wibox.widget {
 
 
 local notifs_clear = wibox.widget {
-	markup = helpers.ui.colorizeText("", beautiful.accent),
+	markup = helpers.ui.colorizeText("", beautiful.red),
 	align = "center",
 	valign = "center",
 	widget = wibox.widget.textbox,

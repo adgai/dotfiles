@@ -66,8 +66,8 @@ local widget = wibox.widget {
 }
 
 awesome.connect_signal(signal, function (value)
-	widget:get_children_by_id('progressbar')[1].value = value
-	widget:get_children_by_id('text')[1].text = value.. "%"
+	widget:get_children_by_id("progressbar")[1].value = value
+	widget:get_children_by_id("text")[1].text = value.. "%"
 end)
 
 return widget
@@ -139,9 +139,9 @@ volume:buttons  {
 }
 
 awesome.connect_signal("volume::value", function(value, icon)
-	volume:get_children_by_id('progressbar')[1].value = value
-	volume:get_children_by_id('text')[1].text = value
-	volume:get_children_by_id('icon')[1].text = icon
+	volume:get_children_by_id("progressbar")[1].value = value
+	volume:get_children_by_id("text")[1].text = value
+	volume:get_children_by_id("icon")[1].text = icon
 end)
 
 local bright = create_progressbar_widget(beautiful.violet, 370, "")
@@ -158,8 +158,8 @@ bright:buttons  {
 }
 
 awesome.connect_signal("bright::value", function(value, icon)
-	bright:get_children_by_id('progressbar')[1].value = value
-	bright:get_children_by_id('text')[1].text = value
+	bright:get_children_by_id("progressbar")[1].value = value
+	bright:get_children_by_id("text")[1].text = value
 end)
 
 local info = wibox.widget {
@@ -353,13 +353,13 @@ end
 
 local toggle_change = function(x, widget)
 	if x == "off" then
-		widget:get_children_by_id('value')[1].text = "Off"
-		widget:get_children_by_id('icon_container')[1]:set_bg(beautiful.background_urgent)
-		widget:get_children_by_id('icon_container')[1]:set_fg(beautiful.foreground)
+		widget:get_children_by_id("value")[1].text = "Off"
+		widget:get_children_by_id("icon_container")[1]:set_bg(beautiful.background_urgent)
+		widget:get_children_by_id("icon_container")[1]:set_fg(beautiful.foreground)
 	else
-		widget:get_children_by_id('value')[1].text = "On"
-		widget:get_children_by_id('icon_container')[1]:set_bg(beautiful.accent)
-		widget:get_children_by_id('icon_container')[1]:set_fg(beautiful.background)
+		widget:get_children_by_id("value")[1].text = "On"
+		widget:get_children_by_id("icon_container")[1]:set_bg(beautiful.accent)
+		widget:get_children_by_id("icon_container")[1]:set_fg(beautiful.background)
 	end
 end
 
@@ -385,7 +385,7 @@ function wifi_button()
 	end)
 end
 
-wifi:get_children_by_id('icon_container')[1]:buttons {
+wifi:get_children_by_id("icon_container")[1]:buttons {
 	awful.button({}, 1, function()
 		wifi_button()
 		update_value_of_wifi()
@@ -402,7 +402,7 @@ awesome.connect_signal("capture_muted::value", function(value)
 	end
 end)
 
-micro:get_children_by_id('icon_container')[1]:buttons {
+micro:get_children_by_id("icon_container")[1]:buttons {
 	awful.button({}, 1, function()
 		awful.spawn.with_shell("amixer -D pipewire sset Capture toggle")
 		updateVolumeSignals()
@@ -412,7 +412,7 @@ micro:get_children_by_id('icon_container')[1]:buttons {
 local float = create_toggle_widget(beautiful.accent, beautiful.background, "", "Floating", "On", false)
 toggle_change("off", float)
 
-float:get_children_by_id('icon_container')[1]:buttons {
+float:get_children_by_id("icon_container")[1]:buttons {
 	awful.button({}, 1, function()
 		vars.float_value_default = not vars.float_value_default
 		local tags = awful.screen.focused().tags
@@ -432,7 +432,7 @@ float:get_children_by_id('icon_container')[1]:buttons {
 
 local opacity = create_toggle_widget(beautiful.accent, beautiful.background, "", "Opacity", "On", false)
 
-opacity:get_children_by_id('icon_container')[1]:buttons {
+opacity:get_children_by_id("icon_container")[1]:buttons {
 	awful.button({}, 1, function()
 		vars.opacity_value_default = not vars.opacity_value_default
 		if not vars.opacity_value_default then

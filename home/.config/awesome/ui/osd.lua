@@ -5,25 +5,6 @@ local beautiful = require("beautiful")
 
 -- osd ----------------------------
 
-local slider = wibox.widget {
-	widget = wibox.widget.progressbar,
-	max_value = 100,
-	forced_width = 380,
-	forced_height = 10,
-	background_color = beautiful.background_urgent,
-	color = beautiful.accent,
-}
-
-local icon_widget = wibox.widget {
-	widget = wibox.widget.textbox,
-	font = beautiful.font .. " 14",
-}
-
-local text = wibox.widget {
-	widget = wibox.widget.textbox,
-	halign = "center"
-}
-
 local info = wibox.widget {
 	layout = wibox.layout.fixed.horizontal,
 	{
@@ -33,13 +14,29 @@ local info = wibox.widget {
 			layout = wibox.layout.fixed.horizontal,
 			fill_space = true,
 			spacing = 8,
-			icon_widget,
+			{
+				widget = wibox.widget.textbox,
+				id = "icon",
+				font = beautiful.font .. " 14",
+			},
 			{
 				widget = wibox.container.background,
 				forced_width = 36,
-				text,
+				{
+					widget = wibox.widget.textbox,
+					id = "text",
+					halign = "center"
+				},
 			},
-			slider,
+			{
+				widget = wibox.widget.progressbar,
+				id = "progressbar",
+				max_value = 100,
+				forced_width = 380,
+				forced_height = 10,
+				background_color = beautiful.background_urgent,
+				color = beautiful.accent,
+			},
 		}
 	}
 }
@@ -63,17 +60,17 @@ local osd = awful.popup {
 -- volume ---------------------------
 
 awesome.connect_signal("volume::value", function(value, icon)
-	slider.value = value
-	text.text = value
-	icon_widget.text = icon
+	info:get_children_by_id("progressbar")[1].value = value
+	info:get_children_by_id("text")[1].text = value
+	info:get_children_by_id("icon")[1].text = icon
 end)
 
 -- bright ---------------------------
 
 awesome.connect_signal("bright::value", function(value)
-	slider.value = value
-	text.text = value
-	icon_widget.text = ""
+	info:get_children_by_id("progressbar")[1].value = value
+	info:get_children_by_id("text")[1].text = value
+	info:get_children_by_id("icon")[1].text = ""
 end)
 
 -- function -------------------------

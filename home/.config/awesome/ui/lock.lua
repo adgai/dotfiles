@@ -1,6 +1,7 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
+local helpers = require("helpers")
 local beautiful = require("beautiful")
 local pampath = require("gears").filesystem.get_configuration_dir() .. "liblua_pam.so"
 
@@ -89,18 +90,18 @@ local icon = wibox.widget {
 		widget = wibox.container.margin,
 		margins = 16,
 		{
+			widget = wibox.widget.textbox,
 			font = beautiful.font .. " 24",
 			text = "",
 			align = "center",
-			valign = "center",
-			widget = wibox.widget.textbox
+			valign = "center"
 		}
 	}
 }
 
 local prompt = wibox.widget {
 	widget = wibox.widget.textbox,
-	markup = "<span foreground='" .. beautiful.foreground .. "75'>enter password...</span>",
+	markup = helpers.ui.colorizeText("enter password", ""),
 	align = "center",
 }
 
@@ -160,14 +161,14 @@ main:setup {
 
 local function reset()
 	characters_entered = 0;
-	prompt.markup = "<span foreground='" .. beautiful.foreground .. "75'>enter password...</span>"
+	prompt.markup = helpers.ui.colorizeText("enter password...", "")
 end
 
 -- Fail
 
 local function fail()
 	characters_entered = 0;
-	prompt.markup = "<span foreground='" .. beautiful.foreground .. "'>try again...</span>"
+	prompt.markup = helpers.ui.colorizeText("try again...", "")
 end
 
 -- Input
@@ -175,7 +176,7 @@ end
 local function grabpassword()
 	awful.prompt.run {
 		hooks = {
-			{{ }, 'Escape', function(_)
+			{{ }, "Escape", function(_)
 					reset()
 					grabpassword()
 				end
@@ -184,14 +185,14 @@ local function grabpassword()
 		keypressed_callback  = function(_, key)
 			if #key == 1 then
 				characters_entered = characters_entered + 1
-				prompt.markup = "<span foreground='" .. beautiful.foreground .. "'>" .. string.rep("*", characters_entered) .. "</span>"
+				prompt.markup = helpers.ui.colorizeText(string.rep("*", characters_entered), "")
 			elseif key == "BackSpace" then
 				if characters_entered > 1 then
 					characters_entered = characters_entered - 1
-					prompt.markup = "<span foreground='" .. beautiful.foreground .. "'>" .. string.rep("*", characters_entered) .. "</span>"
+					prompt.markup = helpers.ui.colorizeText(string.rep("*", characters_entered), "")
 				else
 					characters_entered = 0
-					prompt.markup = "<span foreground='" .. beautiful.foreground .. "75'>enter password...</span>"
+					prompt.markup = helpers.ui.colorizeText("enter password...", "")
 				end
 			end
 		end,

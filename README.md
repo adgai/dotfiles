@@ -108,3 +108,4 @@ return M
 - [Myagko](https://github.com/Myagko/dotfiles)
 - [Stardust-kyun](https://github.com/Stardust-kyun/dotfiles)
 - [Saimoom](https://github.com/saimoomedits/dotfiles/tree/main)
+- [Chadcat7](https://github.com/chadcat7/crystal)

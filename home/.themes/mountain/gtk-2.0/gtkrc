@@ -1,6 +1,6 @@
 gtk-color-scheme = "foreground:#f0f0f0"
 gtk-color-scheme = "background:#191919"
-gtk-color-scheme = "background_alt:#393939"
+gtk-color-scheme = "background_alt:#292929"
 gtk-color-scheme = "accent:#c49ea0"
 
 include "widgets/default"

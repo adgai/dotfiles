@@ -4,6 +4,6 @@ require("awful.autofocus")
 local beautiful = require("beautiful")
 
 awful.spawn.with_shell("~/.config/awesome/autostart.sh")
-beautiful.init("~/.config/awesome/themes/theme.lua")
+beautiful.init("~/.config/awesome/theme/theme.lua")
 require("config")
 require("ui")

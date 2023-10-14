@@ -4,17 +4,20 @@ local xresources = require("beautiful.xresources")
 local rnotification = require("ruled.notification")
 
 local theme = {}
+
 theme.font = "JetBrainsMono Nerd Font 11"
 theme.useless_gap = 5
-theme.wall = "~/.config/awesome/themes/wall.jpg"
+
+theme.wall = ""
+
 -- icons ---------------------------------------
 
-theme.notification_wifi_icon = "~/.config/awesome/themes/icons/wifi.svg"
-theme.battery_icon = "~/.config/awesome/themes/icons/battery.svg"
-theme.profile_image = "~/.config/awesome/themes/icons/profile_img.svg"
-theme.notification_icon = "~/.config/awesome/themes/icons/bell.svg"
-theme.notification_icon_error = "~/.config/awesome/themes/icons/alert.svg"
-theme.notification_icon_scrensht = "~/.config/awesome/themes/icons/camera.svg"
+theme.notification_wifi_icon = "~/.config/awesome/theme/icons/wifi.svg"
+theme.battery_icon = "~/.config/awesome/theme/icons/battery.svg"
+theme.profile_image = "~/.config/awesome/theme/icons/profile_img.svg"
+theme.notification_icon = "~/.config/awesome/theme/icons/bell.svg"
+theme.notification_icon_error = "~/.config/awesome/theme/icons/alert.svg"
+theme.notification_icon_scrensht = "~/.config/awesome/theme/icons/camera.svg"
 
 -- colors -------------------------------------
 
@@ -45,17 +48,16 @@ theme.titlebar_fg_focus = theme.foreground
 theme.titlebar_bg_urgent = theme.background_alt
 theme.titlebar_fg_urgent = theme.foreground
 
-theme.titlebar_close_button_normal = "~/.config/awesome/themes/icons/inactive_button.svg"
-theme.titlebar_close_button_focus = "~/.config/awesome/themes/icons/close_button.svg"
+theme.titlebar_close_button_normal = "~/.config/awesome/theme/icons/inactive_button.svg"
+theme.titlebar_close_button_focus = "~/.config/awesome/theme/icons/close_button.svg"
 
-theme.titlebar_minimize_button_normal = "~/.config/awesome/themes/icons/inactive_button.svg"
-theme.titlebar_minimize_button_focus = "~/.config/awesome/themes/icons/minimize_button.svg"
+theme.titlebar_minimize_button_normal = "~/.config/awesome/theme/icons/inactive_button.svg"
+theme.titlebar_minimize_button_focus = "~/.config/awesome/theme/icons/minimize_button.svg"
 
-theme.titlebar_maximized_button_normal_inactive = "~/.config/awesome/themes/icons/inactive_button.svg"
-theme.titlebar_maximized_button_focus_inactive = "~/.config/awesome/themes/icons/maximize_button.svg"
-theme.titlebar_maximized_button_normal_active = "~/.config/awesome/themes/icons/inactive_button.svg"
-theme.titlebar_maximized_button_focus_active = "~/.config/awesome/themes/icons/maximize_button.svg"
-
+theme.titlebar_maximized_button_normal_inactive = "~/.config/awesome/theme/icons/inactive_button.svg"
+theme.titlebar_maximized_button_focus_inactive = "~/.config/awesome/theme/icons/maximize_button.svg"
+theme.titlebar_maximized_button_normal_active = "~/.config/awesome/theme/icons/inactive_button.svg"
+theme.titlebar_maximized_button_focus_active = "~/.config/awesome/theme/icons/maximize_button.svg"
 
 -- borders -------------------------------------
 
@@ -94,7 +96,7 @@ theme.taglist_fg_volatile = theme.foreground
 
 -- bling ----------------------------------------
 
-theme.playerctl_player  = {"%any"}
+theme.playerctl_player = {"%any"}
 theme.playerctl_update_on_activity = true
 theme.playerctl_position_update_interval = 1
 
@@ -103,9 +105,6 @@ theme.playerctl_position_update_interval = 1
 theme.tooltip_bg = theme.background
 theme.tooltip_fg = theme.foreground
 theme.tooltip_border_width = theme.border_width
-
--- Define the icon theme for application icons. If not set then the icons
--- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 
 return theme
 

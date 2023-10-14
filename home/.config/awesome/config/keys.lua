@@ -9,16 +9,15 @@ mod = "Mod4"
 alt = "Mod1"
 ctrl = "Control"
 shift = "Shift"
-terminal = "alacritty"
 
 awful.keyboard.append_global_keybindings({
 
 	-- launch programms --
 
-	awful.key({ mod }, "Return", function() awful.spawn(terminal) end),
+	awful.key({ mod }, "Return", function() awful.spawn("alacritty") end),
 	awful.key({ mod }, "e", function() awful.spawn("thunar") end),
 	awful.key({ mod }, "b", function() awful.spawn("librewolf") end),
-	awful.key({ mod }, "a", function() awful.spawn("ayugram-desktop") end),
+	awful.key({ mod }, "a", function() awful.spawn("ayugram-desktop" or "telegram-desktop") end),
 	awful.key({}, "Print", function() awful.spawn("flameshot gui") end),
 
 	-- some scripts --
