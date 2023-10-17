@@ -66,7 +66,7 @@ xi awesome-git
 > Install Other Dependencies
 
 ```bash
-sudo xbps-install feh xclip gpick xrdb picom polkit-gnome fontconfig fontconfig-32bit ImageMagick zbar slop shotgun fish-shell playerctl brightnessctl
+sudo xbps-install feh xclip gpick xrdb picom polkit-gnome fontconfig fontconfig-32bit ImageMagick zbar slop shotgun fish-shell playerctl brightnessctl python3-distro
 ```
 
 </details>
