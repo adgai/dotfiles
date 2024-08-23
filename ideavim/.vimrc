@@ -3,7 +3,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'preservim/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
-let mapleader=","
+let mapleader="\<space>"
 set easymotion
 
 set clipboard+=unnamed  "共享剪切板
@@ -79,6 +79,9 @@ inoremap <D-p> <Esc>vi(P
 inoremap <C-D-p> <Esc>vi"P
 
 
+nnoremap <D-left> ^
+nnoremap <D-right> $
+
 vnoremap p "_dhp
 
 nnoremap U viwU
@@ -87,10 +90,15 @@ nnoremap <M>o :normal! va(BV<CR>
 
 
 
-
 Plug 'michaeljsmith/vim-indent-object'
 
 
 
+map gs <Action>(GotoSuperMethod)
 
+map <leader>f <Action>(ReformatCode)
+map <leader>ra <Action>(RunAnything)
+map <leader>c <Action>(Git.Menu)
+map <leader>d <Action>(Debug)
 
+map <leader>u <Action>(GitUpdateSelectedBranchAction)
