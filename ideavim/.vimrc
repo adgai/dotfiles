@@ -59,13 +59,38 @@ nnoremap yg yiw
 "nnoremap pl vi"p
 "nnoremap po viwp
 
-nnoremap <C-p> viwp
-nnoremap <D-p> vi(p
-nnoremap <D-C-p> vi"p
+nnoremap <C-p> viwP
+
+nnoremap <D-p> vi(P
+
+nnoremap <C-D-p> vi"P
+
+
+vnoremap <C-p> viwP
+
+vnoremap <D-p> vi(P
+
+vnoremap <C-D-p> vi"P
+
+inoremap <C-p> <Esc>viwP
+
+inoremap <D-p> <Esc>vi(P
+
+inoremap <C-D-p> <Esc>vi"P
+
+
+vnoremap p "_dhp
 
 nnoremap U viwU
 
 nnoremap <M>o :normal! va(BV<CR>
-vnoremap p "_dhp
+
+
+
 
 Plug 'michaeljsmith/vim-indent-object'
+
+
+
+
+
