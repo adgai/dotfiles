@@ -95,10 +95,12 @@ Plug 'michaeljsmith/vim-indent-object'
 
 
 map gs <Action>(GotoSuperMethod)
+map gf <Action>(GotoImplementation)
 
 map <leader>f <Action>(ReformatCode)
 map <leader>ra <Action>(RunAnything)
 map <leader>c <Action>(Git.Menu)
 map <leader>d <Action>(Debug)
+map <leader>a <Action>(Annotate)
+map <leader>l <Action>(GitUpdateSelectedBranchAction)
 
-map <leader>u <Action>(GitUpdateSelectedBranchAction)
