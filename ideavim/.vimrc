@@ -35,6 +35,9 @@ set sneak
 set quickscope
 set hls
 
+
+
+
 nnoremap <F1> :sp<CR>
 nnoremap <F2> :vsp<CR>
 nnoremap <F3> :marks<CR>
@@ -82,6 +85,9 @@ inoremap <C-D-p> <Esc>vi"P
 nnoremap <D-left> ^
 nnoremap <D-right> $
 
+inoremap <D-left> <Esc>^
+inoremap <D-right> <Esc>$
+
 vnoremap p "_dhp
 
 nnoremap U viwU
@@ -93,14 +99,85 @@ nnoremap <M>o :normal! va(BV<CR>
 Plug 'michaeljsmith/vim-indent-object'
 
 
-
 map gs <Action>(GotoSuperMethod)
 map gf <Action>(GotoImplementation)
 
 map <leader>f <Action>(ReformatCode)
+imap <leader>f <Esc><Action>(ReformatCode)
 map <leader>ra <Action>(RunAnything)
-map <leader>c <Action>(Git.Menu)
+map <leader>c <Action>(CopyReference)
+" map <leader>c <Action>(Git.Menu)
 map <leader>d <Action>(Debug)
+map <leader>s <Action>(Stop)
 map <leader>a <Action>(Annotate)
-map <leader>l <Action>(GitUpdateSelectedBranchAction)
+" map <leader>l <Action>(GitUpdateSelectedBranchAction)
+map <leader>q <Action>(CloseAllEditorsButActive)
+map <leader>w <Action>(CloseActiveTab)
+map <leader>e <Action>(RecentFiles)
+map <leader>b <Action>(Jdbc.OpenEditor.DDL)
+
+nmap <leader>I :call Praise("IdeaVim")<CR>
+
+function! Praise(name)
+  echo a:name .. " is good"
+endfunction
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+set keep-english-in-normal-and-restore-in-insert restore input method when return insert mode " 这个会在我们推出编辑模式时候切换成英文输入法
+
+" 重命名
+nmap <leader>rn <Action>(RenameElement)
+nmap <D-]>  <Action>(NextTab)
+
+nmap <leader>m <Action>(main.toolbar.Project)
+" 新建类
+nmap <leader>nc <Action>(NewClass)
+
+nnoremap <D-j> down
+ nmap<D-k> up
+nmap `` <Action>(ActivateTerminalToolWindow)
+
+sethandler <D-j> a:vim i:ide
+sethandler <D-k> a:vim i:ide
+
+nmap <A-[> <Action>(PreviousTab)
+nmap <A-]> <Action>(NextTab)
+
+
+" 跳转method
+nmap <D-[> <Action>(MethodUp)
+nmap <D-]> <Action>(MethodDown)
+vmap <D-[> <Action>(MethodUp)
+vmap <D-]> <Action>(MethodDown)
+imap <D-[> <Esc><Action>(MethodUp)
+imap <D-]> <Esc><Action>(MethodDown)
+
+" 找到上一个或下一个突出高亮
+nmap <C-[> <Action>(GotoPrevElementUnderCaretUsage)
+nmap <C-]> <Action>(GotoNextElementUnderCaretUsage)
+
+nmap <D-A-[> <Action>(Back)
+nmap <D-A-]> <Action>(Forward)
+
+imap <D-A-[>  <Esc><Action>(Back)
+imap <D-A-]>  <Esc><Action>(Forward)
+vmap <D-A-[>  <Esc><Action>(Back)
+vmap <D-A-]>  <Esc><Action>(Forward)
+nmap <C-A-]>  <Action>(NextProjectWindow)
+nmap <C-A-[>  <Action>(PreviousProjectWindow)
+
+" 滚动时保持上下边距
+set scrolloff=5
+nmap <leader>n <Action>(ProjectFromVersionControl)
+
+nmap <leader>v <Action>(Vcs.UpdateProject) <CR><CR>
+
+nmap <leader>g G
+nnoremap <leader>u viwU
+vnoremap <leader>u U
+inoremap <leader>u <esc>viwU
+
+nnoremap <leader>l V
+nnoremap <leader>b <Action>(Build)
+
+nmap <leader>z <Action>(Generate)<CR>
 
