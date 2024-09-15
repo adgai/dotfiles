@@ -5,7 +5,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 let mapleader="\<space>"
 set easymotion
-
+set  nerdtree
 set clipboard+=unnamed  "共享剪切板
 set easymotion
 syntax on  "语法高亮
@@ -66,20 +66,20 @@ nnoremap <C-p> viwP
 
 nnoremap <D-p> vi(P
 
-nnoremap <C-D-p> vi"P
+nnoremap <A-p> vi"P
 
 
 vnoremap <C-p> viwP
 
 vnoremap <D-p> vi(P
 
-vnoremap <C-D-p> vi"P
+vnoremap <A-p> vi"P
 
 inoremap <C-p> <Esc>viwP
 
 inoremap <D-p> <Esc>vi(P
 
-inoremap <C-D-p> <Esc>vi"P
+inoremap <A-p> <Esc>vi"P
 
 
 nnoremap <D-left> ^
@@ -103,7 +103,7 @@ map gs <Action>(GotoSuperMethod)
 map gf <Action>(GotoImplementation)
 
 map <leader>f <Action>(ReformatCode)
-imap <leader>f <Esc><Action>(ReformatCode)
+" imap <leader>f <Esc><Action>(ReformatCode)
 map <leader>ra <Action>(RunAnything)
 map <leader>c <Action>(CopyReference)
 " map <leader>c <Action>(Git.Menu)
@@ -114,7 +114,7 @@ map <leader>a <Action>(Annotate)
 map <leader>q <Action>(CloseAllEditorsButActive)
 map <leader>w <Action>(CloseActiveTab)
 map <leader>e <Action>(RecentFiles)
-map <leader>b <Action>(Jdbc.OpenEditor.DDL)
+
 
 nmap <leader>I :call Praise("IdeaVim")<CR>
 
@@ -129,6 +129,7 @@ nmap <leader>rn <Action>(RenameElement)
 nmap <D-]>  <Action>(NextTab)
 
 nmap <leader>m <Action>(main.toolbar.Project)
+"  imap <leader>m <Esc><Action>(main.toolbar.Project)
 " 新建类
 nmap <leader>nc <Action>(NewClass)
 
@@ -174,10 +175,22 @@ nmap <leader>v <Action>(Vcs.UpdateProject) <CR><CR>
 nmap <leader>g G
 nnoremap <leader>u viwU
 vnoremap <leader>u U
-inoremap <leader>u <esc>viwU
+"inoremap <leader>u <esc>viwU
 
 nnoremap <leader>l V
 nnoremap <leader>b <Action>(Build)
 
 nmap <leader>z <Action>(Generate)<CR>
+map <leader>b <Action>(CompileDirty)
+map <leader>o <Action>(OptimizeImports)
 
+if &ide =~? 'intellij idea'
+  map <leader>b <Action>(CompileDirty)
+elseif &ide =~? 'datagrip'
+  map <leader>b <Action>(Jdbc.OpenEditor.DDL)
+endif
+
+
+map <leader>j <Action>(BMPOJOtoJson.Convert2)
+map <leader>h  <Action>(SelectInProjectView)
+map <leader>y  yy
