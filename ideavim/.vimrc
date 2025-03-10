@@ -4,7 +4,6 @@ Plug 'preservim/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 let mapleader="\<space>"
-set easymotion
 set  nerdtree
 set clipboard+=unnamed  "共享剪切板
 set easymotion
@@ -85,6 +84,9 @@ inoremap <A-p> <Esc>vi"P
 nnoremap <D-left> ^
 nnoremap <D-right> $
 
+vnoremap <D-left> ^
+vnoremap <D-right> $
+
 inoremap <D-left> <Esc>^
 inoremap <D-right> <Esc>$
 
@@ -112,7 +114,7 @@ map <leader>s <Action>(Stop)
 map <leader>a <Action>(Annotate)
 " map <leader>l <Action>(GitUpdateSelectedBranchAction)
 map <leader>q <Action>(CloseAllEditorsButActive)
-map <leader>w <Action>(CloseActiveTab)
+" nmap <leader>w <Action>(CloseContent)
 map <leader>e <Action>(RecentFiles)
 
 
@@ -170,9 +172,9 @@ nmap <C-A-[>  <Action>(PreviousProjectWindow)
 set scrolloff=5
 nmap <leader>n <Action>(ProjectFromVersionControl)
 
-nmap <leader>v <Action>(Vcs.UpdateProject) <CR><CR>
-
+nmap <leader>v <Action>(Vcs.UpdateProject)<CR>
 nmap <leader>g G
+vmap <leader>g G
 nnoremap <leader>u viwU
 vnoremap <leader>u U
 "inoremap <leader>u <esc>viwU
@@ -194,3 +196,25 @@ endif
 map <leader>j <Action>(BMPOJOtoJson.Convert2)
 map <leader>h  <Action>(SelectInProjectView)
 map <leader>y  yy
+nnoremap <F4> :action UnsplitAll<CR>
+
+ 
+nnoremap <F4> :action  SplitChooser.SplitCenter<CR>
+nnoremap <C-A-down>  <C-W>j
+nnoremap <C-A-left> <C-W>h
+nnoremap <C-A-right> <C-W>l
+nnoremap <C-A-up> <C-W>k
+" nmap z <Action>(ToggleDistractionFreeMode) "打开蝉模式 只展示代码页面
+
+" d0
+
+nmap <leader>n  <Action>(Git.CompareWithBranch)
+nmap d[ d^
+nmap d] d$
+
+nmap c[ c^
+nmap c] c$
+
+nmap sm <Action>(GetMethodAtCaretAction)
+nmap sc <Action>(GetMethodBodyAtCaretAction)
+nmap
