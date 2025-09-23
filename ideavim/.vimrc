@@ -200,10 +200,10 @@ nnoremap <F4> :action UnsplitAll<CR>
 
  
 nnoremap <F4> :action  SplitChooser.SplitCenter<CR>
-nnoremap <C-A-down>  <C-W>j
-nnoremap <C-A-left> <C-W>h
-nnoremap <C-A-right> <C-W>l
-nnoremap <C-A-up> <C-W>k
+"nnoremap <C-A-down>  <C-W>j
+"nnoremap <C-A-left> <C-W>h
+"nnoremap <C-A-right> <C-W>l
+"nnoremap <C-A-up> <C-W>k
 " nmap z <Action>(ToggleDistractionFreeMode) "打开蝉模式 只展示代码页面
 
 " d0
@@ -215,6 +215,14 @@ nmap d] d$
 nmap c[ c^
 nmap c] c$
 
-nmap sm <Action>(GetMethodAtCaretAction)
+nmap vm <Action>(GetMethodAtCaretAction)
 nmap sc <Action>(GetMethodBodyAtCaretAction)
-nmap
+nmap <A-up> <Action>(PreviousDiff)
+nmap <A-down> <Action>(NextDiff)
+
+
+:map <A-h> <Action>(ResizeLeftWindowC)
+:map <A-l> <Action>(ResizeRightWindowC)
+:map <A-j> <Action>(ResizeUpWindowC)
+:map <A-k> <Action>(ResizeDownWindowC)
+
